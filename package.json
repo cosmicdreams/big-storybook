@@ -1,20 +1,23 @@
 {
   "name": "big-storybook",
   "version": "1.0.0",
-  "description": "",
+  "description": "Storybook for HTML components",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "@storybook/html": "^4.0.9",
-    "@babel/core": "^7.1.6",
-    "babel-loader": "^8.0.4"
+    "@storybook/addon-essentials": "^8.4.0",
+    "@storybook/blocks": "^8.4.0",
+    "@storybook/html": "^8.4.0",
+    "@storybook/html-vite": "^8.4.0",
+    "storybook": "^8.4.0",
+    "vite": "^5.4.0"
   }
 }

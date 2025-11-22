@@ -1,5 +1,7 @@
-import { document, console } from 'global';
-import { storiesOf } from '@storybook/html';
+/**
+ * WebRTC Stories - CSF3 Format
+ * Screen sharing component using the Screen Capture API
+ */
 
 // Component styles
 import '../css/webrtc/screen-share.css';
@@ -22,7 +24,7 @@ function createScreenShareComponent() {
     screenShare: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>`,
     stop: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"></rect></svg>`,
     monitor: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line><path d="M7 8l3 3-3 3"></path><line x1="12" y1="11" x2="17" y2="11"></line></svg>`,
-    fullscreen: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>`
+    fullscreen: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>`,
   };
 
   // Header
@@ -124,9 +126,9 @@ function createScreenShareComponent() {
       mediaStream = await navigator.mediaDevices.getDisplayMedia({
         video: {
           cursor: 'always',
-          displaySurface: 'monitor'
+          displaySurface: 'monitor',
         },
-        audio: false
+        audio: false,
       });
 
       // Set video source
@@ -142,7 +144,7 @@ function createScreenShareComponent() {
         label: label,
         width: settings.width,
         height: settings.height,
-        frameRate: settings.frameRate
+        frameRate: settings.frameRate,
       });
 
       updateUI('sharing', `Sharing: ${label}`);
@@ -152,7 +154,6 @@ function createScreenShareComponent() {
         console.log('Screen sharing stopped by user');
         stopScreenShare();
       };
-
     } catch (error) {
       console.error('Screen sharing error:', error);
 
@@ -181,7 +182,7 @@ function createScreenShareComponent() {
   // Stop screen sharing
   function stopScreenShare() {
     if (mediaStream) {
-      mediaStream.getTracks().forEach(track => {
+      mediaStream.getTracks().forEach((track) => {
         track.stop();
         console.log('Track stopped:', track.label);
       });
@@ -196,7 +197,7 @@ function createScreenShareComponent() {
   // Toggle fullscreen
   function toggleFullscreen() {
     if (!document.fullscreenElement) {
-      preview.requestFullscreen().catch(err => {
+      preview.requestFullscreen().catch((err) => {
         console.error('Fullscreen error:', err);
       });
     } else {
@@ -212,10 +213,18 @@ function createScreenShareComponent() {
   return container;
 }
 
-// Register stories
-storiesOf('WebRTC', module)
-  .add('Screen Sharing', () => createScreenShareComponent())
-  .add('Screen Sharing (Info)', () => {
+export default {
+  title: 'WebRTC',
+};
+
+export const ScreenSharing = {
+  name: 'Screen Sharing',
+  render: () => createScreenShareComponent(),
+};
+
+export const ScreenSharingInfo = {
+  name: 'Screen Sharing (Info)',
+  render: () => {
     const info = document.createElement('div');
     info.className = 'screen-share';
     info.innerHTML = `
@@ -258,4 +267,5 @@ storiesOf('WebRTC', module)
       </div>
     `;
     return info;
-  });
+  },
+};
