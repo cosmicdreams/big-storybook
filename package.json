@@ -1,14 +1,24 @@
 {
   "name": "big-storybook",
-  "version": "1.0.0",
-  "description": "Storybook for HTML components",
+  "version": "2.0.0",
+  "description": "Production-ready Storybook for HTML components with WebRTC screen sharing",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "lint": "eslint stories/**/*.js .storybook/**/*.js",
+    "lint:fix": "eslint stories/**/*.js .storybook/**/*.js --fix",
+    "format": "prettier --write stories/**/*.js .storybook/**/*.js css/**/*.css",
+    "format:check": "prettier --check stories/**/*.js .storybook/**/*.js css/**/*.css"
   },
-  "keywords": [],
+  "keywords": [
+    "storybook",
+    "webrtc",
+    "screen-sharing",
+    "components",
+    "html"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {},
@@ -17,6 +27,8 @@
     "@storybook/blocks": "^8.4.0",
     "@storybook/html": "^8.4.0",
     "@storybook/html-vite": "^8.4.0",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.0",
     "storybook": "^8.4.0",
     "vite": "^5.4.0"
   }

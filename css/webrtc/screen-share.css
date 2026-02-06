@@ -1,4 +1,4 @@
-/* WebRTC Screen Sharing Component Styles */
+/* WebRTC Screen Sharing Component Styles - Production Ready */
 
 .screen-share {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
@@ -21,7 +21,7 @@
 
 .screen-share-header p {
   margin: 0;
-  color: #666;
+  color: #4b5563; /* Improved contrast from #666 */
   font-size: 14px;
 }
 
@@ -43,6 +43,13 @@
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
+  position: relative;
+}
+
+/* Accessibility: Focus visible styles */
+.screen-share-btn:focus-visible {
+  outline: 3px solid #4f46e5;
+  outline-offset: 2px;
 }
 
 .screen-share-btn:disabled {
@@ -59,6 +66,11 @@
   background-color: #4338ca;
 }
 
+.screen-share-btn--start:active:not(:disabled) {
+  background-color: #3730a3;
+  transform: scale(0.98);
+}
+
 .screen-share-btn--stop {
   background-color: #ef4444;
   color: white;
@@ -68,9 +80,15 @@
   background-color: #dc2626;
 }
 
+.screen-share-btn--stop:active:not(:disabled) {
+  background-color: #b91c1c;
+  transform: scale(0.98);
+}
+
 .screen-share-btn-icon {
   width: 18px;
   height: 18px;
+  flex-shrink: 0;
 }
 
 .screen-share-preview {
@@ -84,18 +102,35 @@
   justify-content: center;
 }
 
-.screen-share-preview video {
+/* Video and placeholder visibility classes */
+.screen-share-video,
+.screen-share-placeholder {
   width: 100%;
   height: 100%;
+}
+
+.screen-share-video {
   object-fit: contain;
 }
 
-.screen-share-placeholder {
+.screen-share-video--hidden,
+.screen-share-placeholder--hidden {
+  display: none;
+}
+
+.screen-share-video--visible {
+  display: block;
+}
+
+.screen-share-placeholder--visible {
   display: flex;
+}
+
+.screen-share-placeholder {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #9ca3af;
+  color: #d1d5e7; /* Improved contrast from #9ca3af */
   text-align: center;
   padding: 40px;
 }
@@ -104,7 +139,7 @@
   width: 64px;
   height: 64px;
   margin-bottom: 16px;
-  opacity: 0.5;
+  opacity: 0.6; /* Slightly improved from 0.5 */
 }
 
 .screen-share-placeholder p {
@@ -118,21 +153,27 @@
   border-radius: 8px;
   font-size: 14px;
   text-align: center;
+  font-weight: 500;
 }
 
 .screen-share-status--idle {
   background-color: #f3f4f6;
-  color: #6b7280;
+  color: #374151; /* Improved contrast from #6b7280 */
+}
+
+.screen-share-status--requesting {
+  background-color: #dbeafe;
+  color: #1e40af;
 }
 
 .screen-share-status--sharing {
   background-color: #dcfce7;
-  color: #166534;
+  color: #15803d; /* Improved contrast from #166534 */
 }
 
 .screen-share-status--error {
   background-color: #fef2f2;
-  color: #991b1b;
+  color: #b91c1c; /* Improved contrast from #991b1b */
 }
 
 .screen-share-status-indicator {
@@ -141,25 +182,47 @@
   height: 8px;
   border-radius: 50%;
   margin-right: 8px;
-  animation: pulse 2s infinite;
+  vertical-align: middle;
 }
 
 .screen-share-status--sharing .screen-share-status-indicator {
   background-color: #22c55e;
+  animation: pulse 2s infinite;
+}
+
+.screen-share-status--requesting .screen-share-status-indicator {
+  background-color: #3b82f6;
+  animation: pulse 1.5s infinite;
 }
 
 .screen-share-status--idle .screen-share-status-indicator {
   background-color: #9ca3af;
-  animation: none;
 }
 
 .screen-share-status--error .screen-share-status-indicator {
   background-color: #ef4444;
-  animation: none;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .screen-share-btn,
+  .screen-share-fullscreen-btn {
+    transition: none;
+  }
+
+  .screen-share-status-indicator {
+    animation: none !important;
+  }
+
+  .screen-share-btn--start:active:not(:disabled),
+  .screen-share-btn--stop:active:not(:disabled) {
+    transform: none;
+  }
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -178,11 +241,23 @@
   border-radius: 6px;
   padding: 8px;
   cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
-.screen-share-preview:hover .screen-share-fullscreen-btn {
+.screen-share-fullscreen-btn--hidden {
+  display: none;
+}
+
+.screen-share-fullscreen-btn--visible {
+  display: block;
+  opacity: 0;
+}
+
+/* Show fullscreen button on hover or focus */
+.screen-share-preview:hover .screen-share-fullscreen-btn--visible,
+.screen-share-fullscreen-btn--visible:focus-visible {
   opacity: 1;
 }
 
@@ -190,8 +265,88 @@
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+/* Accessibility: Focus visible for fullscreen button */
+.screen-share-fullscreen-btn:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
+  opacity: 1;
+}
+
 .screen-share-fullscreen-btn svg {
   width: 20px;
   height: 20px;
   display: block;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .screen-share-btn {
+    border: 2px solid currentColor;
+  }
+
+  .screen-share-btn:focus-visible {
+    outline-width: 4px;
+  }
+
+  .screen-share-status {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Dark mode support (respects system preference) */
+@media (prefers-color-scheme: dark) {
+  .screen-share-header h2 {
+    color: #f9fafb;
+  }
+
+  .screen-share-header p {
+    color: #d1d5db;
+  }
+
+  .screen-share-status--idle {
+    background-color: #374151;
+    color: #d1d5db;
+  }
+}
+
+/* Print styles - hide video controls when printing */
+@media print {
+  .screen-share-controls,
+  .screen-share-fullscreen-btn {
+    display: none !important;
+  }
+
+  .screen-share-preview {
+    page-break-inside: avoid;
+  }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 640px) {
+  .screen-share {
+    padding: 16px;
+  }
+
+  .screen-share-controls {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .screen-share-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .screen-share-placeholder {
+    padding: 20px;
+  }
+
+  .screen-share-placeholder-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .screen-share-placeholder p {
+    font-size: 14px;
+  }
 }
