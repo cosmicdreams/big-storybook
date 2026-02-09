@@ -1,0 +1,86 @@
+/* Modern Native Accordion - Baseline 2024 */
+
+.accordion-group {
+    max-width: 600px;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* 
+   The 'name' attribute on details allows for group-exclusive behavior (Accordion)
+   without JavaScript! This is a Baseline 2024 feature.
+*/
+.modern-details {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+    transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+.modern-details[open] {
+    border-color: #6366f1;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.1);
+}
+
+.modern-details summary {
+    list-style: none;
+    padding: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.modern-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.modern-details summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #9ca3af;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.modern-details[open] summary::after {
+    content: '−';
+    transform: rotate(180deg);
+    color: #6366f1;
+}
+
+/* 
+   Styling the content - Baseline is working on better ways to animate 
+   content-visibility, but for now we use simple padding transitions.
+*/
+.details-content {
+    padding: 0 1.25rem 1.25rem 1.25rem;
+    color: #4b5563;
+    line-height: 1.6;
+    animation: slide-down 0.3s ease-out;
+}
+
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* High-fidelity hover state */
+.modern-details:hover:not([open]) {
+    background: #f9fafb;
+    border-color: #d1d5db;
+}

@@ -1,0 +1,142 @@
+:root {
+    --perf-primary: #2563eb;
+    --perf-success: #10b981;
+    --perf-warning: #f59e0b;
+    --perf-danger: #ef4444;
+    --perf-bg: #f8fafc;
+    --perf-card-bg: #ffffff;
+    --perf-border: #e2e8f0;
+    --perf-text: #1e293b;
+}
+
+.perf-container {
+    font-family: system-ui, -apple-system, sans-serif;
+    color: var(--perf-text);
+    background: var(--perf-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.perf-header {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--perf-border);
+    padding-bottom: 1rem;
+}
+
+/* Dashboard Scorecard */
+.perf-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.perf-card {
+    background: var(--perf-card-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--perf-border);
+    transition: transform 0.2s;
+}
+
+.perf-card:hover {
+    transform: translateY(-2px);
+}
+
+.perf-card-title {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.perf-card-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Waterfall View */
+.waterfall-container {
+    background: var(--perf-card-bg);
+    border: 1px solid var(--perf-border);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.waterfall-row {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--perf-border);
+    font-size: 0.8rem;
+}
+
+.waterfall-row:last-child {
+    border-bottom: none;
+}
+
+.waterfall-name {
+    flex: 0 0 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+}
+
+.waterfall-bar-container {
+    flex: 1;
+    height: 12px;
+    background: #f1f5f9;
+    border-radius: 6px;
+    position: relative;
+}
+
+.waterfall-bar {
+    position: absolute;
+    height: 100%;
+    background: var(--perf-primary);
+    border-radius: 6px;
+    min-width: 2px;
+}
+
+.waterfall-bar.js {
+    background: #f7df1e;
+}
+
+.waterfall-bar.css {
+    background: #264de4;
+    color: white;
+}
+
+.waterfall-bar.img {
+    background: #4caf50;
+}
+
+/* Status Indicators */
+.status-good {
+    color: var(--perf-success);
+}
+
+.status-needs-improvement {
+    color: var(--perf-warning);
+}
+
+.status-poor {
+    color: var(--perf-danger);
+}
+
+/* LoAF specific */
+.loaf-warning {
+    background: #fff7ed;
+    border: 1px solid #ffedd5;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}

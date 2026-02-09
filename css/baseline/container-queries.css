@@ -1,0 +1,100 @@
+/* Container Query Base Styles */
+.cq-demo-wrapper {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #1a1a1a;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* 1. Responsive Card */
+.card-container {
+    container-type: inline-size;
+    container-name: card;
+    width: 100%;
+}
+
+.responsive-card {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.responsive-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-image {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+@container card (min-width: 500px) {
+    .responsive-card {
+        flex-direction: row;
+        height: 250px;
+    }
+
+    .card-image {
+        width: 40%;
+        height: 100%;
+    }
+}
+
+/* 2. Sidebar/Main Content Widgets */
+.widget-container {
+    container-type: inline-size;
+    width: 100%;
+}
+
+.stats-widget {
+    background: white;
+    padding: 1rem;
+    border-radius: 12px;
+    display: grid;
+    gap: 1rem;
+}
+
+@container (min-width: 400px) {
+    .stats-widget {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* 3. Container Query Units */
+.unit-demo-container {
+    container-type: size;
+    height: 300px;
+    width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    resize: both;
+    overflow: auto;
+}
+
+.dynamic-text {
+    font-size: var(--cq-unit-size, clamp(1rem, 8cqw, 4rem));
+    font-weight: 800;
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+}

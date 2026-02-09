@@ -85,6 +85,26 @@
   transform: scale(0.98);
 }
 
+.screen-share-btn--record {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.screen-share-btn--record:hover:not(:disabled) {
+  background-color: #d97706;
+}
+
+.screen-share-btn--recording {
+  background-color: #dc2626;
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+}
+
 .screen-share-btn-icon {
   width: 18px;
   height: 18px;
@@ -174,6 +194,12 @@
 .screen-share-status--error {
   background-color: #fef2f2;
   color: #b91c1c; /* Improved contrast from #991b1b */
+}
+
+.screen-share-status--recording {
+  background-color: #fee2e2;
+  color: #991b1b;
+  font-weight: 700;
 }
 
 .screen-share-status-indicator {
