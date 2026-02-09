@@ -1,6 +1,6 @@
 {
   "name": "big-storybook",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Production-ready Storybook for HTML components with WebRTC screen sharing",
   "type": "module",
   "main": "index.js",
