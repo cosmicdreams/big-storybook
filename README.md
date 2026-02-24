@@ -1,112 +1,149 @@
-# Big-Storybook: Fun components I find.
+# Big-Storybook
 
-A cutting-edge Storybook library demonstrating the absolute limits of the modern web platform. This repository serves as a high-fidelity gallery of components built using **Baseline 2024/2025** features, pure CSS/HTML, and zero heavy dependencies.
+A personal gallery and reuse library of web platform ideas. Components are standalone, portable, and built using **Baseline 2024/2025** browser features — pure CSS/HTML with zero heavy dependencies.
 
-## 🌟 The Three Pillars
-
-### 1. [Baseline Category](./stories/baseline)
-Deep dives into the latest browser-native features. No external libraries, no heavy JS—just pure web platform power.
-- **Scroll-Driven Animations**: Parallax and reveal effects using native `scroll-timeline`.
-- **Anchor Positioning**: Tethered tooltips and menus using the latest 2025 CSS spec.
-- **Parent-Aware UI**: Logic-driven styling using the `:has()` selector.
-- **Dynamic Color Engine**: Systemic palettes derived via **Color Mix** and **Relative Color Syntax**.
-- **Modern Transitions**: Smooth state changes via the **View Transition API**.
-
-### 2. [Modern UI Kit](./stories/modern-ui-kit)
-A "Shadcn-inspired" set of 30+ production-ready components built for the modern web.
-- **Core Components**: Buttons, Badges, Inputs, Switches, and Labels.
-- **Data & Forms**: Advanced tables, OTP inputs, progress bars, and accessible radio groups.
-- **Navigation**: Mega menus, functional tabs, breadcrumbs, and carousels.
-- **Overlays**: Native `<dialog>` modals, tooltips, and toast notifications.
-
-### 3. [Premium Visuals](./stories/modern-ui-kit/Premium.stories.js)
-Cinematic landing page effects for high-impact user experiences.
-- **Interactive Bento Grid**: The signature Apple-style feature grid with mouse-responsive glow.
-- **Retro Grid**: A scrolling 3D perspective "synthwave" floor with a stylized sun.
-- **Border Beam**: A high-end glowing beam that travels along container perimeters.
-- **Meteors & Aurora**: Atmospheric particle backgrounds and flowing text gradients.
-
-## 🛠️ Tech Stack & Tooling
-
-- **Runtime**: [Bun](https://bun.sh/) - Ultra-fast package manager and test runner.
-- **Environment**: [Storybook 10](https://storybook.js.org/) - The latest component development environment.
-- **CSS**: Modern CSS (Variables, `@property`, Container Queries, Grid).
-- **Testing**: [Vitest](https://vitest.dev/) + [Playwright](https://playwright.dev/) - Integrated interaction tests running in real browsers.
-
-## 📋 Prerequisites
-
-- **Bun** (Recommended) or Node.js 20+
-- **Modern Browser** (Chrome 125+, Safari 17.4+, or Firefox 128+) to support Baseline 2024 features like `:has()` and Scroll-Driven Animations.
-
-## 🚀 Getting Started
+## Getting Started
 
 ```bash
-# Install dependencies
 bun install
-
-# Start the Storybook development server
-bun run storybook
-
-# Run the automated interaction test suite
-bun run test:storybook
+bun run storybook        # dev server at localhost:6006
+bun run test:storybook   # full interaction test suite
 ```
 
-Storybook will be available at `http://localhost:6006/`
-
-## 📦 Deliverable Components
-
-Starting with version 4.0.0, every component in this library is **portable and deliverable**. They follow a strict "Component-First" architecture, making it easy to drop them into any project.
-
-### Standalone Structure
-Each component lives in its own directory within `src/components/`:
-- `[name].html`: Semantic markup template.
-- `[name].css`: Scoped component styles.
-- `[name].js`: (Optional) Interactive logic or initialization script.
-
-### Component Categories
-| Category | Description | Examples |
-|:---|:---|:---|
-| `ui` | Core functional components | Button, Card, Dialog, Input, Tabs |
-| `premium` | High-impact visual effects | Border Beam, Meteors, Bento Grid |
-| `blocks` | Complex layout patterns | Hero Grid, Pricing Toggle |
-| `web-components` | encapsulated custom elements | local-iframe |
-
-To use a component, simply copy its folder and link the CSS/JS files in your project.
-
-## 🏗️ Project Structure
-
-```text
-big-storybook/
-├── src/
-│   └── components/       # Standalone, portable component units
-│       ├── ui/           # Core UI Elements
-│       ├── premium/      # Advanced Visual Effects
-│       ├── blocks/       # Complex Page Sections
-│       └── web-components/# Custom Element implementations
-├── stories/              # Storybook definitions (import from src/components)
-├── css/                  # Legacy/Global styles (Transitioning to standalone)
-│   ├── globals.css       # Design tokens and base resets
-│   └── modern-ui-kit/    # (Deprecated) Old monolithic stylesheets
-├── .storybook/           # Storybook configuration
-└── README.md             # This guide
-```
-
-## 🧪 Testing Architecture
-
-This repo features a robust **Interaction Testing** suite. Every component in the **Modern UI Kit** and **Baseline** set is automatically validated using:
-- **Playwright** for real browser rendering (Chromium).
-- **Vitest** as the test runner for CI-ready performance.
-- **Storybook Play Functions** to simulate user interactions (clicking, typing, state changes).
-
-Total Tests: **70+ Passing**
-
-## 🔒 Security & Performance
-- **Zero Runtime Dependencies**: Most components require 0KB of JavaScript to render and animate.
-- **Accessibility First**: All components follow WAI-ARIA patterns and use semantic HTML.
-- **High Performance**: Native browser APIs are used instead of heavy polyfills or animation libraries.
+Requires a modern browser (Chrome 125+, Safari 17.4+, Firefox 128+) for Baseline 2024 features.
 
 ---
 
-**Version**: 4.0.0 (The Deliverable Library)  
-**Status**: 70+ Tests Passing ✅  
+## Component Categories
+
+### [Baseline](./stories/baseline)
+Deep dives into cutting-edge browser-native CSS and HTML. No external libraries, no heavy JS.
+
+| Component | Feature |
+|:---|:---|
+| `accordion` | Native `<details>`/`<summary>` with CSS transitions |
+| `anchor-positioning` | Tethered tooltips and menus using the 2025 CSS spec |
+| `at-property` | Animatable custom properties via `@property` |
+| `color-system` | Systemic palettes via `color-mix()` and relative color syntax |
+| `container-queries` | Component-level responsive layout |
+| `gallery` | Scroll-driven image gallery |
+| `navigation` | Disclosure navigation with `:has()` |
+| `performance` | Content-visibility and rendering optimizations |
+| `popover` | Native `popover` API with anchor positioning |
+| `scroll-driven` | Parallax and reveal effects via native `scroll-timeline` |
+| `smart-cards` | `:has()`-driven interactive card states |
+| `spiral-text` | SVG text path animation |
+| `transitions` | View Transition API demos |
+| `typography` | Fluid type with `clamp()` and viewport units |
+
+### [Shadcn](./stories/shadcn)
+Shadcn-inspired production-ready components with a shared design token system.
+
+**Core**: Button, Badge, Input, Checkbox, Radio, Switch, Slider, Separator
+**Data & Forms**: Table, Progress, OTP Input, Command Menu
+**Navigation**: Tabs, Breadcrumb, Pagination, Navigation Menu, Menubar
+**Overlays**: Dialog, Toast, Tooltip, Popover
+**Layout**: Card, Accordion, Avatar, Carousel, Skeleton, Typography
+
+### [Codepen](./stories/codepen)
+Cinematic landing page effects sourced and adapted from the web.
+
+| Component | Effect |
+|:---|:---|
+| `aurora-text` | Flowing gradient text animation |
+| `bento-grid` | Apple-style feature grid with mouse-responsive glow |
+| `border-beam` | Glowing beam traveling along container perimeters |
+| `meteors` | Atmospheric particle rain background |
+| `retro-grid` | Scrolling 3D perspective synthwave floor |
+| `shimmer-button` | Shimmer sweep CTA button |
+
+### [CSS-Tricks](./stories/css-tricks)
+Explorations of modern CSS techniques.
+
+| Component | Technique |
+|:---|:---|
+| `discoverability` | Hover-reveal UI patterns |
+| `interest-invoker` | `interest-target` API experiments |
+| `proximity` | Distance-based CSS hover effects |
+| `scroll-shadow` | Scroll-position-aware overflow shadows |
+| `scroll-snap-reveal` | Snap-point triggered animations |
+| `scroll-spawn` | Elements spawned by scroll position |
+| `scroll-switchback` | Alternating scroll-driven layouts |
+
+### [Blocks](./stories/library)
+Complex layout patterns ready to drop into a page.
+
+- `hero-grid` — Asymmetric hero with image grid
+- `pricing` — Pricing toggle with animated tier cards
+
+### [Library](./stories/library)
+- `gallery` — Masonry-style filterable image gallery
+
+### [Web Components](./stories/web-components)
+Encapsulated custom elements.
+
+- `share-webrtc` — Peer-to-peer screen sharing via WebRTC
+- `local-iframe` — Sandboxed iframe wrapper with templating
+
+---
+
+## Tech Stack
+
+| Tool | Purpose |
+|:---|:---|
+| [Bun](https://bun.sh/) | Package manager and test runner |
+| [Storybook 10](https://storybook.js.org/) | Component development environment |
+| [Vite](https://vitejs.dev/) | Build tooling |
+| [Vitest](https://vitest.dev/) + [Playwright](https://playwright.dev/) | Interaction tests in real browsers |
+
+## Getting Started
+
+```bash
+bun install
+bun run storybook        # dev server at localhost:6006
+bun run test:storybook   # full interaction test suite
+```
+
+Requires a modern browser (Chrome 125+, Safari 17.4+, Firefox 128+) for Baseline 2024 features.
+
+## Component Architecture
+
+Every component follows a standalone, portable structure:
+
+```
+src/components/[category]/[name]/
+├── [name].html    # semantic markup
+├── [name].css     # scoped styles
+└── [name].js      # (optional) interaction logic
+```
+
+To reuse a component, copy its folder and link the CSS/JS in your project.
+
+```
+big-storybook/
+├── src/
+│   └── components/
+│       ├── baseline/       # Browser-native feature demos
+│       ├── shadcn/         # Shadcn-inspired UI kit
+│       ├── codepen/        # Premium visual effects
+│       ├── css-tricks/     # CSS technique explorations
+│       ├── blocks/         # Page section patterns
+│       ├── library/        # General-purpose components
+│       └── web-components/ # Custom element implementations
+├── stories/                # Storybook story files
+├── css/
+│   └── modern-ui-kit/      # Shared design tokens (globals.css)
+└── .storybook/             # Storybook configuration
+```
+
+## Testing
+
+Interaction tests run via Playwright (Chromium) + Vitest, using Storybook play functions to simulate clicks, typing, and state changes.
+
+```bash
+bun run test:storybook
+```
+
+---
+
 **Engine**: Bun + Storybook 10
