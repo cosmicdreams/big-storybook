@@ -1,7 +1,7 @@
-import '../../../src/components/baseline/css-shapes/css-shapes.css';
+import '../../../src/components/css-tricks/css-shapes/css-shapes.css';
 
 export default {
-  title: 'Baseline/CSSShapes',
+  title: 'CSS-Tricks/CSSShapes',
   parameters: {
     layout: 'padded',
   },
