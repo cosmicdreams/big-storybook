@@ -1,0 +1,32 @@
+.ui-accordion {
+    width: 100%;
+}
+
+.ui-accordion-item {
+    border-bottom: 1px solid hsl(var(--border));
+}
+
+.ui-accordion-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    font-weight: 500;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: inherit;
+    transition: all 0.2s;
+}
+
+.ui-accordion-trigger:hover {
+    text-decoration: underline;
+}
+
+.ui-accordion-content {
+    overflow: hidden;
+    padding-bottom: 1rem;
+    font-size: 0.875rem;
+    color: hsl(var(--muted-foreground));
+}

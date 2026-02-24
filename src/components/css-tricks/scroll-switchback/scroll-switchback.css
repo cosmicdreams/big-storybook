@@ -1,0 +1,173 @@
+/* Switchback Scroll Container */
+.scroll-switchback-demo {
+    font-family: 'Inter', system-ui, sans-serif;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem;
+    color: #1f2937;
+}
+
+.switchback-banner {
+    background: #fdf2f8;
+    border: 1px solid #fbcfe8;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2rem;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #831843;
+}
+
+.switchback-banner code {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+}
+
+/* The core container query implementation */
+.switchback-viewport {
+    width: 100%;
+    height: 400px;
+    border-radius: 16px;
+    background: #111827;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.switchback-container {
+    width: 100%;
+    height: 100%;
+
+    /* Make it a scroll-state container */
+    container-type: scroll-state;
+    container-name: switchback;
+
+    /* Start by enforcing horizontal scroll only */
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+}
+
+.switchback-content-w {
+    display: flex;
+    width: max-content;
+    height: max-content;
+    /* It actually extends downward too, unlocking Y later */
+    min-height: 100%;
+}
+
+.switchback-panel {
+    width: 100cqw;
+    height: 100cqh;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;
+    padding: 4rem;
+    text-align: center;
+    color: white;
+}
+
+.switchback-panel h3 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.switchback-panel p {
+    font-size: 1.1rem;
+    color: #9ca3af;
+    max-width: 400px;
+}
+
+/* Panel thematic colors */
+.panel-1 {
+    background: radial-gradient(circle at center, #1e1b4b, #111827);
+}
+
+.panel-2 {
+    background: radial-gradient(circle at center, #312e81, #111827);
+}
+
+/* The Corner Panel where axis switches */
+.panel-corner {
+    background: radial-gradient(circle at center, #831843, #111827);
+    display: flex;
+    flex-direction: column;
+}
+
+.corner-msg {
+    color: #fbcfe8;
+    font-size: 1.25rem;
+    margin-top: 2rem;
+    animation: pulse 2s infinite;
+}
+
+/* The vertical extension of the corner */
+.vertical-track {
+    width: 100cqw;
+    height: 200cqh;
+    /* Scroll down two more panels */
+    background: linear-gradient(to bottom, transparent, #0f172a, #020617);
+}
+
+.panel-vertical-end {
+    height: 100cqh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;
+    color: #38bdf8;
+}
+
+.panel-vertical-end h3 {
+    font-size: 3rem;
+    text-transform: uppercase;
+}
+
+/* The Magic Trick: Detect right edge */
+@container switchback scroll-state(scrollable: right) {
+
+    /* When we CAN scroll right, hide vertical scrolling */
+    .switchback-container {
+        /* no effect if container natively hides y, but just in case we enforce it */
+    }
+}
+
+/* When `scrollable: right` is FALSE (meaning we hit the right boundary) */
+@container switchback not scroll-state(scrollable: right) {
+
+    /* Then Unlock vertical scrolling! */
+    .switchback-container {
+        overflow-y: auto !important;
+        scroll-snap-type: y mandatory !important;
+    }
+
+    .corner-msg::after {
+        content: " ↓ Scroll Down Now ↓";
+        display: block;
+        margin-top: 1rem;
+        color: #f472b6;
+        font-weight: bold;
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: scale(0.95);
+    }
+}

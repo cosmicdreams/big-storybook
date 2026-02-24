@@ -1,0 +1,137 @@
+/* Scroll-State Snap-Reveal Card */
+.scroll-snap-reveal-demo {
+    font-family: 'Inter', system-ui, sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    color: #1f2937;
+}
+
+.snap-reveal-banner {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2rem;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #14532d;
+}
+
+.snap-reveal-banner code {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+}
+
+.snap-reveal-carousel {
+    display: flex;
+    overflow-x: auto;
+    gap: 2rem;
+    padding: 2rem 50%;
+    /* Paddington push so items can center easily */
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scroll-padding: 0 50%;
+    border-radius: 20px;
+    background: #f3f4f6;
+    overscroll-behavior-x: contain;
+}
+
+.snap-reveal-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.snap-reveal-carousel {
+    scrollbar-width: none;
+}
+
+/* The item wrapper becomes a scroll-state container! */
+.snap-reveal-item {
+    scroll-snap-align: center;
+    flex: 0 0 350px;
+    container-type: scroll-state;
+    container-name: snap-card;
+}
+
+/* The actual card inside the item wrapper */
+.snap-reveal-card {
+    height: 400px;
+    background: white;
+    border-radius: 24px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform: scale(0.9);
+    opacity: 0.7;
+    filter: grayscale(80%);
+    position: relative;
+    overflow: hidden;
+}
+
+.snap-reveal-card h3 {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.5s 0.1s ease;
+    z-index: 2;
+    color: white;
+}
+
+.snap-reveal-card p {
+    color: #e5e7eb;
+    font-size: 0.95rem;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.5s 0.2s ease;
+    z-index: 2;
+}
+
+.snap-reveal-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 1;
+}
+
+/* 
+  The Magic Trick!
+  When the parent .snap-reveal-item is "snapped" into the center position,
+  the scroll-state query triggers and activates the animations!
+*/
+@container snap-card scroll-state(snapped) {
+    .snap-reveal-card {
+        transform: scale(1.05);
+        opacity: 1;
+        filter: grayscale(0%);
+        box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4);
+    }
+
+    .snap-reveal-card::before {
+        opacity: 1;
+    }
+
+    .snap-reveal-card h3,
+    .snap-reveal-card p {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}

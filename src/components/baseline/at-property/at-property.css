@@ -1,0 +1,102 @@
+@property --gradient-color-1 {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #f3ec78;
+}
+
+@property --gradient-color-2 {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #af4261;
+}
+
+@property --glow-size {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+
+@property --progress-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* Component 1: Gradient Hover Card */
+.at-property-card {
+  width: 300px;
+  height: 200px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: system-ui, sans-serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--gradient-color-1), var(--gradient-color-2));
+  transition:
+    --gradient-color-1 0.8s ease,
+    --gradient-color-2 0.8s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.at-property-card:hover {
+  --gradient-color-1: #4facfe;
+  --gradient-color-2: #00f2fe;
+}
+
+/* Component 2: Radial Glow Button */
+.glow-btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  background-image: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.2) var(--glow-size),
+    transparent calc(var(--glow-size) + 5%)
+  );
+  transition: --glow-size 0.4s ease-out;
+}
+
+.glow-btn:hover {
+  --glow-size: 100%;
+  transform: scale(1.05);
+}
+
+/* Component 3: Conic Progress Ring */
+.progress-ring {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: conic-gradient(#4caf50 var(--progress-angle), #e0e0e0 0deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: --progress-angle 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-ring::after {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: white;
+  border-radius: 50%;
+}
+
+.progress-ring .content {
+  z-index: 1;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: #333;
+}

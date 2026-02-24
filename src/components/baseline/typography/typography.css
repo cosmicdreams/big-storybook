@@ -1,0 +1,85 @@
+/* Premium Modern Typography System */
+:root {
+  --base-font-size: 1rem;
+  --type-scale: 1.25;
+  /* Major Third */
+  --font-heading: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body: 'Georgia', serif;
+  --color-primary: #6366f1;
+  --color-text: #1f2937;
+}
+
+/* Fluid Heading using Container Queries & clamp() */
+.fluid-heading-container {
+  container-type: inline-size;
+  container-name: heading-container;
+  width: 100%;
+  max-width: 1000px;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.fluid-heading {
+  font-size: var(--fluid-size, clamp(2.5rem, 1rem + 6cqw, 6rem));
+  line-height: 1.05;
+  font-weight: 900;
+  font-family: var(--font-heading);
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  /* Baseline feature */
+  margin: 0;
+}
+
+/* Typographic Scale System using pow() */
+.type-scale-system {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+  background: #f9fafb;
+}
+
+.type-scale-item {
+  font-family: var(--font-heading);
+  --level: 0;
+  --scale-ratio: var(--type-scale);
+  font-size: calc(var(--base-font-size) * pow(var(--scale-ratio), var(--level)));
+  /* Baseline feature */
+}
+
+.level-6 {
+  --level: 6;
+  font-weight: 900;
+}
+
+.level-5 {
+  --level: 5;
+  font-weight: 800;
+}
+
+.level-4 {
+  --level: 4;
+  font-weight: 700;
+}
+
+/* Modern Text Effects */
+.gradient-text {
+  font-size: clamp(3rem, 2rem + 5vw, 5rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.drop-cap::first-letter {
+  font-weight: 800;
+  color: var(--color-primary);
+  initial-letter: 3;
+  /* Baseline feature */
+  margin-right: 0.75rem;
+}

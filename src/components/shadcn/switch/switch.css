@@ -1,0 +1,41 @@
+.ui-switch {
+    display: inline-flex;
+    height: 1.5rem;
+    width: 2.75rem;
+    flex-shrink: 0;
+    cursor: pointer;
+    align-items: center;
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    transition: background-color 0.2s;
+    background-color: hsl(var(--input));
+    position: relative;
+    appearance: none;
+    outline: none;
+}
+
+.ui-switch:checked {
+    background-color: hsl(var(--primary));
+}
+
+.ui-switch::after {
+    content: '';
+    display: block;
+    height: 1.25rem;
+    width: 1.25rem;
+    border-radius: 9999px;
+    background-color: hsl(var(--background));
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.1);
+    transition: transform 0.2s;
+    transform: translateX(0);
+}
+
+.ui-switch:checked::after {
+    transform: translateX(1.25rem);
+}
+
+.ui-switch:focus-visible {
+    box-shadow:
+        0 0 0 2px hsl(var(--background)),
+        0 0 0 4px hsl(var(--ring));
+}

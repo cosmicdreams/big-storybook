@@ -1,0 +1,44 @@
+.ui-otp-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ui-otp-group {
+    display: flex;
+    align-items: center;
+}
+
+.ui-otp-input {
+    width: 2.5rem;
+    height: 3rem;
+    border: 1px solid hsl(var(--input));
+    border-right: none;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    background: transparent;
+    color: hsl(var(--foreground));
+}
+
+.ui-otp-input:first-child {
+    border-radius: var(--radius) 0 0 var(--radius);
+}
+
+.ui-otp-input:last-child {
+    border-radius: 0 var(--radius) var(--radius) 0;
+    border-right: 1px solid hsl(var(--input));
+}
+
+.ui-otp-input:focus {
+    z-index: 10;
+    outline: 2px solid hsl(var(--ring));
+    border-right: 1px solid hsl(var(--ring));
+}
+
+.ui-otp-separator {
+    width: 1rem;
+    height: 1px;
+    background: hsl(var(--border));
+    margin: 0 0.25rem;
+}

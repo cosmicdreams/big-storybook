@@ -1,0 +1,92 @@
+<!-- Interest Invoker API Demo -->
+<div class="interest-invoker-demo">
+
+  <!-- Browser Support Banner -->
+  <div class="interest-banner">
+    <strong>Interest Invoker API</strong> — This demo uses the Interest Invoker API
+    (<code>interesttarget</code>, <code>interest-show-delay</code>, <code>interest-hide-delay</code>).
+    In unsupported browsers, a JS polyfill simulates the delay behavior.
+    <span class="interest-badge" data-interest-badge></span>
+  </div>
+
+  <!-- Example 1: Simple Tooltip -->
+  <section class="interest-example">
+    <h3>Simple Tooltip</h3>
+    <p class="interest-description">Hover over the button to reveal a tooltip after a short delay.</p>
+    <div class="interest-example-area">
+      <button class="interest-trigger interest-trigger--button"
+              interesttarget="my-tooltip"
+              style="--interest-show-delay: 200; --interest-hide-delay: 300;">
+        Hover me for tooltip
+      </button>
+      <div popover id="my-tooltip" class="interest-popover interest-popover--tooltip">
+        This is a tooltip revealed by hover intent.
+      </div>
+    </div>
+  </section>
+
+  <!-- Example 2: Link Preview Card -->
+  <section class="interest-example">
+    <h3>Link Preview Card</h3>
+    <p class="interest-description">Hover over the link to see a card-style preview with image and description.</p>
+    <div class="interest-example-area">
+      <a href="#"
+         class="interest-trigger interest-trigger--link"
+         interesttarget="preview-card"
+         style="--interest-show-delay: 300; --interest-hide-delay: 400;"
+         onclick="event.preventDefault()">
+        CSS-Tricks: Interest Invoker API
+      </a>
+      <div popover id="preview-card" class="interest-popover interest-popover--card">
+        <div class="preview-card-image"></div>
+        <div class="preview-card-body">
+          <h4>Interest Invoker API</h4>
+          <p>A new browser API for hover-intent popovers using <code>interesttarget</code> and CSS delay properties. No JavaScript needed in supported browsers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Example 3: Navigation Item with Submenu -->
+  <section class="interest-example">
+    <h3>Navigation Submenu</h3>
+    <p class="interest-description">Hover over a nav item to reveal a mini-submenu popover.</p>
+    <nav class="interest-nav">
+      <ul class="interest-nav-list">
+        <li class="interest-nav-item">
+          <a href="#"
+             class="interest-trigger interest-trigger--nav"
+             interesttarget="submenu-products"
+             style="--interest-show-delay: 150; --interest-hide-delay: 350;"
+             onclick="event.preventDefault()">
+            Products
+          </a>
+          <div popover id="submenu-products" class="interest-popover interest-popover--submenu">
+            <ul class="interest-submenu-list">
+              <li><a href="#" onclick="event.preventDefault()">Widget Alpha</a></li>
+              <li><a href="#" onclick="event.preventDefault()">Widget Beta</a></li>
+              <li><a href="#" onclick="event.preventDefault()">Widget Gamma</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="interest-nav-item">
+          <a href="#"
+             class="interest-trigger interest-trigger--nav"
+             interesttarget="submenu-resources"
+             style="--interest-show-delay: 150; --interest-hide-delay: 350;"
+             onclick="event.preventDefault()">
+            Resources
+          </a>
+          <div popover id="submenu-resources" class="interest-popover interest-popover--submenu">
+            <ul class="interest-submenu-list">
+              <li><a href="#" onclick="event.preventDefault()">Documentation</a></li>
+              <li><a href="#" onclick="event.preventDefault()">Blog</a></li>
+              <li><a href="#" onclick="event.preventDefault()">Community</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </section>
+
+</div>

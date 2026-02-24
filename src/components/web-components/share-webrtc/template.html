@@ -1,0 +1,64 @@
+<div class="screen-share">
+    <div class="screen-share-header">
+        <h2 id="title">Screen Sharing</h2>
+        <p id="description">Production-ready screen sharing and recording.</p>
+    </div>
+
+    <div class="screen-share-controls">
+        <button class="screen-share-btn screen-share-btn--start" id="startBtn">
+            <svg class="screen-share-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+                <line x1="7" y1="2" x2="7" y2="22"></line>
+                <line x1="17" y1="2" x2="17" y2="22"></line>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <line x1="2" y1="7" x2="7" y2="7"></line>
+                <line x1="2" y1="17" x2="7" y2="17"></line>
+                <line x1="17" y1="17" x2="22" y2="17"></line>
+                <line x1="17" y1="7" x2="22" y2="7"></line>
+            </svg>
+            Start Sharing
+        </button>
+        <button class="screen-share-btn screen-share-btn--record" id="recordBtn" disabled>
+            <svg class="screen-share-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            Record
+        </button>
+        <button class="screen-share-btn screen-share-btn--stop" id="stopBtn" disabled>
+            <svg class="screen-share-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            </svg>
+            Stop
+        </button>
+    </div>
+
+    <div class="screen-share-preview">
+        <video class="screen-share-video screen-share-video--hidden" id="video" autoplay playsinline></video>
+        <div class="screen-share-placeholder screen-share-placeholder--visible" id="placeholder">
+            <svg class="screen-share-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+            <p>Video preview will appear here</p>
+        </div>
+        <button class="screen-share-fullscreen-btn screen-share-fullscreen-btn--hidden" id="fullscreenBtn"
+            title="Toggle Fullscreen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3">
+                </path>
+            </svg>
+        </button>
+    </div>
+
+    <div class="screen-share-status screen-share-status--idle" id="status" role="status">
+        <span class="screen-share-status-indicator"></span>
+        Ready to share
+    </div>
+</div>

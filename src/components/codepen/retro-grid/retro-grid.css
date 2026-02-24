@@ -1,0 +1,52 @@
+.premium-retro-grid {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    background: #000;
+    overflow: hidden;
+    perspective: 1000px;
+    border-radius: var(--radius);
+}
+
+.retro-grid-lines {
+    position: absolute;
+    inset: -100% 0;
+    background-image:
+        linear-gradient(to right, #333 1px, transparent 1px),
+        linear-gradient(to bottom, #333 1px, transparent 1px);
+    background-size: 40px 40px;
+    transform: rotateX(60deg) translateY(0%);
+    animation: grid-scroll 10s linear infinite;
+    mask-image: linear-gradient(to top, white, transparent);
+}
+
+@keyframes grid-scroll {
+    from {
+        transform: rotateX(60deg) translateY(0);
+    }
+
+    to {
+        transform: rotateX(60deg) translateY(40px);
+    }
+}
+
+.retro-sun {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(to bottom, #fde047, #f97316);
+    border-radius: 50%;
+    box-shadow: 0 0 50px #f97316;
+    mask-image: repeating-linear-gradient(transparent, transparent 10px, black 10px, black 12px);
+}
+
+.retro-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

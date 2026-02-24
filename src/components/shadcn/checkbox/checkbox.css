@@ -1,0 +1,23 @@
+.ui-checkbox {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid hsl(var(--primary));
+    appearance: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    outline: none;
+}
+
+.ui-checkbox:checked {
+    background-color: hsl(var(--primary));
+}
+
+.ui-checkbox:checked::after {
+    content: '✓';
+    color: hsl(var(--primary-foreground));
+    font-size: 0.75rem;
+}

@@ -1,4 +1,4 @@
-import { createScreenShareComponent } from './brightview/webrtc-screen-share';
+
 
 export default {
   title: 'Introduction',

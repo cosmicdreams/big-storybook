@@ -1,0 +1,242 @@
+/* ============================================================
+   Gallery — Native scroll-state carousel
+   CSS-only active state via container queries + scroll-state()
+   ============================================================ */
+
+/* 7. Overall gallery wrapper */
+.gallery {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* 1. Track / snap backbone */
+.gallery-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+
+.gallery-track::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  position: relative;
+  /* Make each slide a scroll-state container */
+  container-type: scroll-state;
+  container-name: gallery-slide;
+  min-height: 480px;
+  overflow: hidden;
+}
+
+/* 2. Default (non-snapped) slide state — proximity-driven de-emphasis
+   --proximity: 0 (far) → 1 (touching), set by initProximity() in gallery.js */
+.slide-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter:
+    grayscale(calc(100% - var(--proximity, 0) * 100%))
+    brightness(calc(0.5 + var(--proximity, 0) * 0.5));
+  transform: scale(calc(1.04 + var(--proximity, 0) * 0.04));
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.slide-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2.5rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
+  color: white;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s 0.1s ease, transform 0.5s 0.1s ease;
+}
+
+/* 3. CSS-only snapped state — the magic
+   Proximity still applies here: active slide gets a more noticeable glow + scale as cursor nears */
+@container gallery-slide scroll-state(snapped: inline) {
+  .slide-image {
+    filter: grayscale(0%) brightness(calc(1 + var(--proximity, 0) * 0.2));
+    transform: scale(calc(1 + var(--proximity, 0) * 0.04));
+  }
+
+  .slide-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 5. Slide content inner elements */
+.slide-title {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.slide-caption {
+  font-size: 1rem;
+  opacity: 0.85;
+  margin: 0 0 1.25rem;
+  max-width: 50ch;
+}
+
+.slide-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  backdrop-filter: blur(8px);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.slide-link:hover {
+  background: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+/* 6. Thumbnail strip with scroll-shadow edges */
+.gallery-thumbs-wrapper {
+  position: relative;
+  container-type: scroll-state;
+  margin-top: 1rem;
+}
+
+/* Fade indicators when more thumbnails exist */
+.gallery-thumbs-wrapper::before,
+.gallery-thumbs-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 48px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.gallery-thumbs-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.3), transparent);
+}
+
+.gallery-thumbs-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.3), transparent);
+}
+
+@container scroll-state(scrollable: inline-start) {
+  .gallery-thumbs-wrapper::before {
+    opacity: 1;
+  }
+}
+
+@container scroll-state(scrollable: inline-end) {
+  .gallery-thumbs-wrapper::after {
+    opacity: 1;
+  }
+}
+
+.gallery-thumbs {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0.25rem;
+}
+
+.gallery-thumbs::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-thumb {
+  flex: 0 0 80px;
+  aspect-ratio: 16/10;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  overflow: hidden;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s, border-color 0.3s, transform 0.2s;
+}
+
+.gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-thumb:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.gallery-thumb.is-active {
+  border-color: #6366f1;
+  opacity: 1;
+}
+
+/* ============================================================
+   Border Glow variant
+   Add .gallery--border-glow to the .gallery wrapper element.
+   --proximity (0→1) drives an inset ring + ambient halo via ::after.
+   The pseudo-element sits above the image (z:2) while .slide-content
+   is lifted above it (z:3) so text stays readable.
+   ============================================================ */
+.gallery--border-glow .gallery-slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  box-shadow:
+    inset 0 0 0 calc(var(--proximity, 0) * 5px) rgba(99, 102, 241, calc(var(--proximity, 0) * 0.95)),
+    inset 0 0 calc(var(--proximity, 0) * 80px) rgba(99, 102, 241, calc(var(--proximity, 0) * 0.35));
+  transition: box-shadow 0.1s ease;
+}
+
+.gallery--border-glow .slide-content {
+  z-index: 3;
+}
+
+/* ============================================================
+   Border Shade variant
+   Add .gallery--border-shade to the .gallery wrapper element.
+   Dark inset frame + soft vignette — designed for bright backgrounds.
+   Inset technique keeps shadows inside overflow:hidden bounds.
+   ============================================================ */
+.gallery--border-shade .gallery-slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  box-shadow:
+    inset 0 0 0 calc(var(--proximity, 0) * 5px) rgba(0, 0, 0, calc(var(--proximity, 0) * 0.75)),
+    inset 0 0 calc(var(--proximity, 0) * 70px) rgba(0, 0, 0, calc(var(--proximity, 0) * 0.18));
+  transition: box-shadow 0.1s ease;
+}
+
+.gallery--border-shade .slide-content {
+  z-index: 3;
+}

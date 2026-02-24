@@ -1,0 +1,31 @@
+.ui-h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: 1;
+}
+
+.ui-h2 {
+    font-size: 1.875rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    border-bottom: 1px solid hsl(var(--border));
+    padding-bottom: 0.5rem;
+}
+
+.ui-p {
+    font-size: 1rem;
+    line-height: 1.75rem;
+    margin-top: 1.5rem;
+}
+
+.ui-lead {
+    font-size: 1.25rem;
+    color: hsl(var(--muted-foreground));
+}
+
+.ui-small {
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+}

@@ -1,0 +1,156 @@
+/* Proximity UI — :near() pseudo-class concept demo */
+
+.proximity-demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 4rem 2rem;
+  min-height: 500px;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ----------------------------------------------------------------
+   Target element — all visual effects driven by --proximity (0-1)
+   ---------------------------------------------------------------- */
+.proximity-target {
+  --proximity: 0;
+  --distance: 9999;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 220px;
+  height: 220px;
+  border-radius: 1rem;
+  cursor: default;
+  user-select: none;
+
+  /* Base appearance */
+  background: hsl(240 5.9% 10%);
+  color: hsl(0 0% 98%);
+  border: 2px solid hsl(240 5.9% 20%);
+
+  /* Effects driven by --proximity */
+  box-shadow:
+    0 0 0 calc(var(--proximity) * 24px) hsla(245 80% 67% / calc(var(--proximity) * 0.12)),
+    0 calc(4px + var(--proximity) * 16px) calc(12px + var(--proximity) * 40px) hsla(245 80% 67% / calc(var(--proximity) * 0.3));
+  transform: scale(calc(1 + var(--proximity) * 0.08));
+  border-color: hsl(calc(240 + var(--proximity) * 20) calc(10% + var(--proximity) * 70%) calc(20% + var(--proximity) * 40%));
+
+  /* Smooth transitions so it doesn't feel jerky */
+  transition:
+    box-shadow 0.15s ease-out,
+    transform 0.15s ease-out,
+    border-color 0.15s ease-out,
+    background 0.15s ease-out;
+}
+
+.proximity-target .proximity-icon {
+  opacity: calc(0.5 + var(--proximity) * 0.5);
+  transform: scale(calc(1 + var(--proximity) * 0.15));
+  transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+}
+
+.proximity-target .proximity-label {
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+
+.proximity-target .proximity-sublabel {
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+.proximity-target .proximity-sublabel code {
+  background: hsla(0 0% 100% / 0.12);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-size: 0.78rem;
+}
+
+/* ----------------------------------------------------------------
+   Distance readout
+   ---------------------------------------------------------------- */
+.proximity-readout {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.75rem 1.25rem;
+  background: hsl(240 4.8% 95.9%);
+  border: 1px solid hsl(240 5.9% 90%);
+  border-radius: 0.5rem;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.readout-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.readout-key {
+  color: hsl(240 3.8% 46.1%);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.readout-value {
+  font-weight: 600;
+  color: hsl(240 10% 3.9%);
+}
+
+/* ----------------------------------------------------------------
+   Zone legend
+   ---------------------------------------------------------------- */
+.proximity-zones-legend {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.78rem;
+  color: hsl(240 3.8% 46.1%);
+}
+
+.zone-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.zone-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.zone-far .zone-dot {
+  background: hsl(240 5.9% 70%);
+}
+
+.zone-close .zone-dot {
+  background: hsl(245 70% 60%);
+}
+
+.zone-near .zone-dot {
+  background: hsl(250 90% 65%);
+}
+
+/* ----------------------------------------------------------------
+   Touch device: hide readout + legend, disable effects
+   ---------------------------------------------------------------- */
+@media (hover: none) {
+  .proximity-readout,
+  .proximity-zones-legend {
+    display: none;
+  }
+
+  .proximity-target {
+    --proximity: 0 !important;
+  }
+}

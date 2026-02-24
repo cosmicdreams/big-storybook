@@ -1,0 +1,151 @@
+/* Spiral Scrollytelling — CSS sibling-index() technique
+   Inspired by: css-tricks.com/spiral-scrollytelling-in-css-with-sibling-index/
+   Browser support: Chrome 131+ (sibling-index/sibling-count, scroll-driven animations)
+*/
+
+/* ─── Scroll container ─────────────────────────────────────────────────────── */
+
+.spiral-scene {
+  position: relative;
+  /* tall enough to give the scroll timeline room to breathe */
+  height: 500vh;
+  background: #0a0a0f;
+}
+
+/* ─── Sticky viewport ──────────────────────────────────────────────────────── */
+
+.spiral-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Vortex container (rotates the whole spiral as user scrolls) ──────────── */
+
+@keyframes vortex-spin {
+  from { rotate: 0deg; }
+  to   { rotate: -720deg; }
+}
+
+.vortex {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  animation: vortex-spin linear both;
+  animation-timeline: scroll(root);
+  animation-range: 0% 100%;
+}
+
+/* ─── Individual characters ────────────────────────────────────────────────── */
+
+@keyframes char-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.spiral-char {
+  /* Shrinking radius: outermost char has biggest orbit, innermost the smallest */
+  --radius: calc(28vmin - (22vmin / sibling-count() * sibling-index()));
+
+  /* 3 full rotations distributed across all chars */
+  --rotation: calc((360deg * 3 / sibling-count()) * sibling-index());
+
+  /* Scale down towards center */
+  --char-scale: calc(1 - (0.75 / sibling-count() * sibling-index()));
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform:
+    rotate(var(--rotation))
+    translateY(calc(-1 * var(--radius)))
+    scale(var(--char-scale));
+
+  /* Counter-rotate each letter so it stays upright */
+  > span {
+    display: inline-block;
+    rotate: calc(-1 * var(--rotation));
+    font-size: clamp(0.75rem, 2vmin, 1.5rem);
+    font-weight: 700;
+    /* Hue sweeps from violet (270°) to cyan (180°) across the spiral */
+    color: hsl(calc(270 - 90 * sibling-index() / sibling-count()), 90%, 70%);
+    text-shadow: 0 0 14px currentColor;
+    white-space: pre;
+  }
+
+  /* Stagger fade-in per character along the scroll timeline */
+  opacity: 0;
+  animation: char-fade-in linear forwards;
+  animation-timeline: scroll(root);
+  animation-range-start: calc(80% / sibling-count() * sibling-index());
+  animation-range-end:   calc(80% / sibling-count() * sibling-index() + 8%);
+}
+
+/* ─── Prompt overlay (fades out on first scroll) ───────────────────────────── */
+
+@keyframes prompt-fade {
+  0%   { opacity: 1; }
+  10%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.spiral-prompt {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffffff66;
+  font-size: 0.875rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  pointer-events: none;
+  animation: prompt-fade linear both;
+  animation-timeline: scroll(root);
+  animation-range: 0% 15%;
+}
+
+.spiral-prompt::after {
+  content: '';
+  display: block;
+  margin: 0.5rem auto 0;
+  width: 1px;
+  height: 2rem;
+  background: linear-gradient(to bottom, #ffffff66, transparent);
+  animation: prompt-bob 1.4s ease-in-out infinite;
+}
+
+@keyframes prompt-bob {
+  0%, 100% { transform: scaleY(1); opacity: 0.6; }
+  50%       { transform: scaleY(1.4); opacity: 1; }
+}
+
+/* ─── Fallback banner for unsupported browsers ─────────────────────────────── */
+
+.spiral-unsupported {
+  display: none;
+}
+
+@supports not (animation-timeline: scroll()) {
+  .spiral-unsupported {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: #fff;
+    font-family: sans-serif;
+    text-align: center;
+    padding: 2rem;
+    background: #0a0a0f;
+  }
+
+  .spiral-scene {
+    display: none;
+  }
+}

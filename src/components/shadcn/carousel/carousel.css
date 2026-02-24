@@ -1,0 +1,51 @@
+.ui-carousel {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    overflow: hidden;
+}
+
+.ui-carousel-content {
+    display: flex;
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: 1rem;
+    padding: 0.5rem;
+}
+
+.ui-carousel-content::-webkit-scrollbar {
+    display: none;
+}
+
+.ui-carousel-item {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    min-width: 0;
+}
+
+.ui-carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: hsl(var(--background));
+    border: 1px solid hsl(var(--border));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ui-carousel-prev {
+    left: 0.5rem;
+}
+
+.ui-carousel-next {
+    right: 0.5rem;
+}

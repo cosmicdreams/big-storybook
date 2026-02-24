@@ -1,0 +1,71 @@
+<style>
+    :root {
+        --primary: #3b82f6;
+        --bg: #ffffff;
+        --text: #1f2937;
+        --muted: #6b7280;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --bg: #0f172a;
+            --text: #f1f5f9;
+            --muted: #94a3b8;
+        }
+    }
+
+    body {
+        font-family: system-ui, -apple-system, sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(to right, #3b82f6, #8b5cf6);
+        -webkit-background-clip: text;
+        vertical-align: middle;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    p {
+        font-size: 0.875rem;
+        color: var(--muted);
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        background-color: var(--primary);
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<div class="card">
+    <div class="badge">Sandboxed Content</div>
+    <h1>Local Iframe Loaded</h1>
+    <p>This is a localized string rendered inside a secure, sandboxed iframe.</p>
+</div>

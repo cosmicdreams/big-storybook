@@ -53,14 +53,43 @@ bun run test:storybook
 
 Storybook will be available at `http://localhost:6006/`
 
-## 📦 Available Scripts
+## 📦 Deliverable Components
 
-| Script | Description |
-|:---|:---|
-| `bun run storybook` | Start the development server |
-| `bun run test:storybook` | Run all component interaction tests via Vitest + Playwright |
-| `bun run build-storybook` | Build a static production version of the showcase |
-| `bun run lint` | Run code quality checks |
+Starting with version 4.0.0, every component in this library is **portable and deliverable**. They follow a strict "Component-First" architecture, making it easy to drop them into any project.
+
+### Standalone Structure
+Each component lives in its own directory within `src/components/`:
+- `[name].html`: Semantic markup template.
+- `[name].css`: Scoped component styles.
+- `[name].js`: (Optional) Interactive logic or initialization script.
+
+### Component Categories
+| Category | Description | Examples |
+|:---|:---|:---|
+| `ui` | Core functional components | Button, Card, Dialog, Input, Tabs |
+| `premium` | High-impact visual effects | Border Beam, Meteors, Bento Grid |
+| `blocks` | Complex layout patterns | Hero Grid, Pricing Toggle |
+| `web-components` | encapsulated custom elements | local-iframe |
+
+To use a component, simply copy its folder and link the CSS/JS files in your project.
+
+## 🏗️ Project Structure
+
+```text
+big-storybook/
+├── src/
+│   └── components/       # Standalone, portable component units
+│       ├── ui/           # Core UI Elements
+│       ├── premium/      # Advanced Visual Effects
+│       ├── blocks/       # Complex Page Sections
+│       └── web-components/# Custom Element implementations
+├── stories/              # Storybook definitions (import from src/components)
+├── css/                  # Legacy/Global styles (Transitioning to standalone)
+│   ├── globals.css       # Design tokens and base resets
+│   └── modern-ui-kit/    # (Deprecated) Old monolithic stylesheets
+├── .storybook/           # Storybook configuration
+└── README.md             # This guide
+```
 
 ## 🧪 Testing Architecture
 
@@ -69,23 +98,7 @@ This repo features a robust **Interaction Testing** suite. Every component in th
 - **Vitest** as the test runner for CI-ready performance.
 - **Storybook Play Functions** to simulate user interactions (clicking, typing, state changes).
 
-Total Tests: **68+ Passing**
-
-## 🏗️ Project Structure
-
-```text
-big-storybook/
-├── .storybook/           # Testing and Preview configuration
-├── stories/              # Component definitions
-│   ├── baseline/         # Cutting-edge native browser features
-│   ├── modern-ui-kit/    # Reusable UI components & Premium effects
-│   └── WebRTC.stories.js # Legacy/Specialized Screen Sharing components
-├── css/                  # The Styling Hub
-│   ├── baseline/         # Feature-specific stylesheets
-│   └── modern-ui-kit/    # Design system tokens and component styles
-├── package.json          # Modern Bun-based configuration
-└── README.md             # This guide
-```
+Total Tests: **70+ Passing**
 
 ## 🔒 Security & Performance
 - **Zero Runtime Dependencies**: Most components require 0KB of JavaScript to render and animate.
@@ -94,6 +107,6 @@ big-storybook/
 
 ---
 
-**Version**: 3.0.0 (The Modern Showcase)  
-**Status**: 68 Tests Passing ✅  
+**Version**: 4.0.0 (The Deliverable Library)  
+**Status**: 70+ Tests Passing ✅  
 **Engine**: Bun + Storybook 10

@@ -1,0 +1,272 @@
+/* Discoverability Demo — hidden="until-found" + content-visibility: hidden */
+
+.discoverability-demo {
+  padding: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #1f2937;
+  background: #fdfcfb;
+  min-height: 100vh;
+}
+
+/* ---- Section layout ---- */
+
+.discover-section {
+  margin-bottom: 3rem;
+}
+
+.discover-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #111827;
+}
+
+.discover-heading code {
+  background: #f3f4f6;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.discover-subtitle {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+/* ---- Callout ---- */
+
+.discover-callout {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: #1e40af;
+  line-height: 1.5;
+}
+
+.discover-callout kbd {
+  display: inline-block;
+  background: white;
+  border: 1px solid #93c5fd;
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.85em;
+  font-weight: 600;
+  box-shadow: 0 1px 0 #93c5fd;
+}
+
+/* ---- Accordion ---- */
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.accordion-item:last-child {
+  border-bottom: none;
+}
+
+.accordion-trigger {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 1rem 1.25rem;
+  background: #f9fafb;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: inherit;
+}
+
+.accordion-trigger:hover {
+  background: #f3f4f6;
+}
+
+.accordion-trigger code {
+  background: #e5e7eb;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.accordion-panel {
+  padding: 1rem 1.25rem;
+  background: white;
+  line-height: 1.65;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+/* Transition for accordion open */
+.accordion-panel.is-open {
+  animation: panel-reveal 0.35s ease-out;
+}
+
+@keyframes panel-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.accordion-panel p {
+  margin: 0;
+}
+
+.accordion-panel code {
+  background: #f3f4f6;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+/* ---- Comparison Grid ---- */
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .comparison-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.comparison-box {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 1.25rem;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.comparison-label {
+  font-weight: 700;
+  font-size: 0.85rem;
+  font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace;
+  padding: 0.35em 0.65em;
+  border-radius: 6px;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+.comparison-box--display-none .comparison-label {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.comparison-box--visibility-hidden .comparison-label {
+  background: #fefce8;
+  color: #a16207;
+}
+
+.comparison-box--content-visibility .comparison-label {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.comparison-box--until-found .comparison-label {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+/* ---- Badges ---- */
+
+.comparison-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.2em 0.55em;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.badge--yes {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge--no {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* ---- content-visibility: hidden styling ---- */
+
+.cv-hidden {
+  content-visibility: hidden;
+  contain-intrinsic-size: auto none;
+}
+
+/* ---- Comparison notes ---- */
+
+.comparison-note {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  line-height: 1.45;
+  margin: 0;
+  margin-top: auto;
+}
+
+.comparison-content p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #374151;
+}
+
+.comparison-content a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #2563eb;
+}
+
+.discover-subtitle kbd {
+  display: inline-block;
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.85em;
+  font-weight: 600;
+  box-shadow: 0 1px 0 #d1d5db;
+}

@@ -1,0 +1,90 @@
+/* Smart Card Interaction - Baseline 2024 (:has selector) */
+
+.smart-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.smart-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid #e5e7eb;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 
+   The magic :has() selector!
+   Change card style if it contains a checked checkbox.
+*/
+.smart-card:has(input[type='checkbox']:checked) {
+  border-color: #6366f1;
+  background: #f5f3ff;
+  transform: scale(1.02);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Change icon color if checked */
+.smart-card:has(input[type='checkbox']:checked) .status-icon {
+  color: #6366f1;
+  transform: rotate(360deg);
+}
+
+/* Parent awareness: Reveal hidden notes ONLY if card is checked */
+.card-notes {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+  margin-top: 0;
+}
+
+.smart-card:has(input[type='checkbox']:checked) .card-notes {
+  max-height: 100px;
+  opacity: 1;
+  margin-top: 1rem;
+}
+
+.status-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+  transition: transform 0.6s;
+  color: #9ca3af;
+}
+
+.card-control {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+.card-control input {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/* Contextual styling: dim other cards when one is focused? 
+   No, let's keep it simple but powerful: 
+   Highlight card if you hover over the "Action" button specifically.
+*/
+.smart-card:has(.card-action:hover) {
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.card-action {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: none;
+  background: #6366f1;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}

@@ -1,0 +1,92 @@
+.block-hero-grid {
+    position: relative;
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 4rem 2rem;
+    background-color: hsl(var(--background));
+}
+
+.block-hero-grid::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(to right, hsl(var(--foreground) / 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, hsl(var(--foreground) / 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(circle at center, black, transparent 80%);
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    animation: hero-fade-in 1s ease-out;
+}
+
+@keyframes hero-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    background: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    border: 1px solid hsl(var(--primary) / 0.2);
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.hero-description {
+    font-size: 1.25rem;
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-btn-secondary {
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    background: transparent;
+    border: 1px solid hsl(var(--border));
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.hero-btn-secondary:hover {
+    background: hsl(var(--muted));
+    border-color: hsl(var(--primary) / 0.3);
+}
