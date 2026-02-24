@@ -1,0 +1,220 @@
+<!-- CSS shape() Function — Baseline Demo -->
+<!-- Requires Chrome 135+ for clip-path: shape() support -->
+
+<div class="css-shapes-demo">
+  <header class="css-shapes-header">
+    <h1 class="css-shapes-title">CSS <code>shape()</code> Function</h1>
+    <p class="css-shapes-subtitle">
+      <code>clip-path: shape(…)</code> — Chrome 135+. Draw precise paths
+      with lines, arcs, and curves using CSS-native syntax.
+    </p>
+  </header>
+
+  <!-- ============================================================
+       SECTION 1: LINES
+       shape() line commands: line to, hline to, vline to
+  ============================================================ -->
+  <section class="css-shapes-section">
+    <h2 class="css-shapes-section-title">Lines</h2>
+    <div class="css-shapes-grid">
+
+      <!-- Variant 1: Basic rectangle using explicit line to commands -->
+      <div class="css-shapes-card">
+        <div class="shape-box shape--rectangle"></div>
+        <div class="shape-label">
+          <strong>Rectangle</strong>
+          <code>line to</code>
+        </div>
+        <p class="shape-desc">Four explicit <code>line to</code> commands trace each edge.</p>
+      </div>
+
+      <!-- Variant 2: Diagonal cut using hline + vline shortcuts -->
+      <div class="css-shapes-card">
+        <div class="shape-box shape--diagonal-cut"></div>
+        <div class="shape-label">
+          <strong>Diagonal Cut</strong>
+          <code>hline / vline</code>
+        </div>
+        <p class="shape-desc">
+          <code>hline to</code> and <code>vline to</code> draw axis-aligned
+          edges; a final <code>line to</code> creates the diagonal.
+        </p>
+      </div>
+
+      <!-- Variant 3: Arrow chevron shape -->
+      <div class="css-shapes-card">
+        <div class="shape-box shape--arrow"></div>
+        <div class="shape-label">
+          <strong>Arrow</strong>
+          <code>line to</code> (polygon-like)
+        </div>
+        <p class="shape-desc">All straight lines — shape() replaces <code>polygon()</code> with explicit syntax.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 2: ARCS
+       shape() arc command: arc to/by X Y of R [large/small] [cw/ccw]
+  ============================================================ -->
+  <section class="css-shapes-section">
+    <h2 class="css-shapes-section-title">Arcs</h2>
+    <div class="css-shapes-grid">
+
+      <!-- Variant 4: Circular notch / bite taken out of top edge -->
+      <div class="css-shapes-card">
+        <div class="shape-box shape--notch"></div>
+        <div class="shape-label">
+          <strong>Top Notch</strong>
+          <code>arc by … of 1px</code>
+        </div>
+        <p class="shape-desc">
+          A radius of <code>1px</code> on a 2× diameter arc makes a
+          semicircular notch — flipped inward with default <code>ccw</code>.
+        </p>
+      </div>
+
+      <!-- Variant 5: Rounded tab shape -->
+      <div class="css-shapes-card">
+        <div class="shape-box shape--tab"></div>
+        <div class="shape-label">
+          <strong>Rounded Tab</strong>
+          <code>arc by … cw / ccw</code>
+        </div>
+        <p class="shape-desc">
+          Alternating <code>cw</code> and <code>ccw</code> quarter-circle
+          arcs round each corner individually.
+        </p>
+      </div>
+
+      <!-- Variant 6: Pie-sector / progress indicator -->
+      <div class="css-shapes-card">
+        <div class="shape-box shape--sector"></div>
+        <div class="shape-label">
+          <strong>Pie Sector</strong>
+          <code>arc to … of 50% large cw</code>
+        </div>
+        <p class="shape-desc">
+          Trigonometry maps a 0–100 value onto arc coordinates;
+          <code>large cw</code> handles angles > 180°.
+        </p>
+      </div>
+
+      <!-- Variant 7: Scalloped / wavy bottom edge -->
+      <div class="css-shapes-card">
+        <div class="shape-box shape--scallop"></div>
+        <div class="shape-label">
+          <strong>Scallop Edge</strong>
+          <code>arc by … small cw</code> repeating
+        </div>
+        <p class="shape-desc">
+          Multiple small <code>cw</code> arcs along the bottom
+          create a decorative scalloped border.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 3: CURVES (Bézier)
+       shape() curve command: curve to/by X Y with Xc Yc
+  ============================================================ -->
+  <section class="css-shapes-section">
+    <h2 class="css-shapes-section-title">Curves (Bézier)</h2>
+    <div class="css-shapes-grid">
+
+      <!-- Variant 8: Quadratic wave — one control point -->
+      <div class="css-shapes-card">
+        <div class="shape-box shape--wave"></div>
+        <div class="shape-label">
+          <strong>Wave Bottom</strong>
+          <code>curve to … with Xc Yc</code>
+        </div>
+        <p class="shape-desc">
+          A quadratic Bézier: one <code>with</code> control point pulls
+          the bottom edge into a smooth wave.
+        </p>
+      </div>
+
+      <!-- Variant 9: Slanted box with curved shoulder -->
+      <div class="css-shapes-card">
+        <div class="shape-box shape--slant-curve"></div>
+        <div class="shape-label">
+          <strong>Slanted Shoulder</strong>
+          <code>line to</code> + <code>curve to … with</code>
+        </div>
+        <p class="shape-desc">
+          Straight lines plus a single curve command round the
+          transition from a slanted top into the vertical edge.
+        </p>
+      </div>
+
+      <!-- Variant 10: Blob / organic shape using multiple curves -->
+      <div class="css-shapes-card">
+        <div class="shape-box shape--blob"></div>
+        <div class="shape-label">
+          <strong>Organic Blob</strong>
+          <code>curve to</code> × 4
+        </div>
+        <p class="shape-desc">
+          Four quadratic curves — each with a pulled-out control
+          point — produce an asymmetric, organic blob silhouette.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 4: COMBINED / ADVANCED
+  ============================================================ -->
+  <section class="css-shapes-section">
+    <h2 class="css-shapes-section-title">Combined Techniques</h2>
+    <div class="css-shapes-grid">
+
+      <!-- Variant 11: Speech bubble — lines + arc corner -->
+      <div class="css-shapes-card">
+        <div class="shape-box shape--speech-bubble"></div>
+        <div class="shape-label">
+          <strong>Speech Bubble</strong>
+          lines + <code>arc</code> corners + tail
+        </div>
+        <p class="shape-desc">
+          Rounded corners via arcs; the pointy tail is a simple
+          <code>line to</code> triangle.
+        </p>
+      </div>
+
+      <!-- Variant 12: Badge / shield shape -->
+      <div class="css-shapes-card">
+        <div class="shape-box shape--badge"></div>
+        <div class="shape-label">
+          <strong>Badge / Shield</strong>
+          <code>hline</code> + <code>arc</code> + <code>curve</code>
+        </div>
+        <p class="shape-desc">
+          Flat top with arc-rounded upper corners and a curve-pointed
+          bottom — classic badge silhouette.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="css-shapes-footer">
+    <p>
+      Browser support: Chrome 135+, Edge 135+. See
+      <a href="https://css-tricks.com/better-css-shapes-using-shape-part-1-lines-and-arcs/" target="_blank">
+        CSS-Tricks Part 1
+      </a>,
+      <a href="https://css-tricks.com/better-css-shapes-using-shape-part-2-more-on-arcs/" target="_blank">
+        Part 2
+      </a>,
+      <a href="https://css-tricks.com/better-css-shapes-using-shape-part-3-curves/" target="_blank">
+        Part 3
+      </a>.
+    </p>
+  </footer>
+</div>
