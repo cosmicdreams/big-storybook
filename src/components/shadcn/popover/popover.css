@@ -1,0 +1,10 @@
+.ui-popover {
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    padding: 1rem;
+    background: hsl(var(--popover));
+    color: hsl(var(--popover-foreground));
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    font-size: 0.875rem;
+    z-index: 1000;
+}

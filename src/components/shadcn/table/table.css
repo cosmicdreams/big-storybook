@@ -1,0 +1,37 @@
+.ui-table-container {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+}
+
+.ui-table {
+    width: 100%;
+    caption-side: bottom;
+    font-size: 0.875rem;
+    border-collapse: collapse;
+}
+
+.ui-table th {
+    height: 3rem;
+    padding: 0 1rem;
+    text-align: left;
+    vertical-align: middle;
+    font-weight: 500;
+    color: hsl(var(--muted-foreground));
+    border-bottom: 1px solid hsl(var(--border));
+}
+
+.ui-table td {
+    padding: 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid hsl(var(--border));
+}
+
+.ui-table tr:last-child td {
+    border-bottom: 0;
+}
+
+.ui-table tr:hover {
+    background-color: hsl(var(--muted) / 0.5);
+}

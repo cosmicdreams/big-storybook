@@ -1,0 +1,27 @@
+.ui-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.ui-pagination-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius);
+    height: 2.25rem;
+    width: 2.25rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.ui-pagination-link:hover {
+    background-color: hsl(var(--accent));
+}
+
+.ui-pagination-link.active {
+    border: 1px solid hsl(var(--border));
+    background-color: transparent;
+}

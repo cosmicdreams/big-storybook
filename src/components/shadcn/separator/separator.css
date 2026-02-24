@@ -1,0 +1,12 @@
+.ui-separator {
+    background-color: hsl(var(--border));
+    height: 1px;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.ui-separator-vertical {
+    height: 100%;
+    width: 1px;
+    margin: 0 1rem;
+}

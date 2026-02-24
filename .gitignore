@@ -59,3 +59,31 @@ typings/
 
 # next.js build output
 .next
+
+# Storybook build output
+storybook-static/
+
+# Private/local components (not for public repo)
+src/components/_local/
+stories/_local/
+
+# Claude Code agent state
+.agent/
+
+# Playwright CLI session data
+.playwright-cli/
+
+# Test output files
+test_output.txt
+archive/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

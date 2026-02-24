@@ -1,0 +1,25 @@
+.ui-radio {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 9999px;
+    border: 1px solid hsl(var(--primary));
+    appearance: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    outline: none;
+}
+
+.ui-radio:checked {
+    background-color: hsl(var(--primary));
+}
+
+.ui-radio:checked::after {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    background-color: hsl(var(--primary-foreground));
+}

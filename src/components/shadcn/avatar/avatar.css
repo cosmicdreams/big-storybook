@@ -1,0 +1,30 @@
+.ui-avatar {
+    position: relative;
+    display: flex;
+    height: 2.5rem;
+    width: 2.5rem;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 9999px;
+    background-color: hsl(var(--muted));
+}
+
+.ui-avatar-img {
+    aspect-ratio: 1 / 1;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.ui-avatar-fallback {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background-color: hsl(var(--muted));
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: hsl(var(--muted-foreground));
+}
