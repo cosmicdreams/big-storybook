@@ -1,5 +1,5 @@
 import '../../../src/components/baseline/container-queries/container-queries.css';
-import { expect, waitFor } from '@storybook/test';
+import { expect, waitFor } from 'storybook/test';
 
 export default {
   title: 'Baseline/ContainerQueries',

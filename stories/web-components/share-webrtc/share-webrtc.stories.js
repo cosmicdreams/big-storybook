@@ -2,7 +2,7 @@
  * WebRTC Stories - CSF3 Format
  */
 
-import { expect, userEvent, within, fn, spyOn } from '@storybook/test';
+import { expect, userEvent, within, fn, spyOn } from 'storybook/test';
 import '../../../src/components/web-components/share-webrtc/share-webrtc.js';
 
 /**

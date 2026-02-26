@@ -1,5 +1,5 @@
 import '../../../src/components/baseline/accordion/accordion.css';
-import { expect, within, userEvent, waitFor } from '@storybook/test';
+import { expect, within, userEvent, waitFor } from 'storybook/test';
 
 export default {
   title: 'Baseline/Accordion',

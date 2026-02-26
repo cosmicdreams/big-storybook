@@ -1,4 +1,4 @@
-import { expect, userEvent, within, fireEvent } from '@storybook/test';
+import { expect, userEvent, within, fireEvent } from 'storybook/test';
 import '../../../src/components/css-tricks/interest-invoker/interest-invoker.css';
 import { initInterestInvoker } from '../../../src/components/css-tricks/interest-invoker/interest-invoker.js';
 

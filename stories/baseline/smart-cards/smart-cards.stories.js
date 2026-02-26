@@ -1,5 +1,5 @@
 import '../../../src/components/baseline/smart-cards/smart-cards.css';
-import { expect, userEvent, waitFor } from '@storybook/test';
+import { expect, userEvent, waitFor } from 'storybook/test';
 
 export default {
   title: 'Baseline/SmartCards',

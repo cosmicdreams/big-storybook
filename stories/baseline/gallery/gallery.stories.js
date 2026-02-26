@@ -1,5 +1,5 @@
 import '../../../src/components/baseline/gallery/gallery.css';
-import { expect, userEvent, waitFor } from '@storybook/test';
+import { expect, userEvent, waitFor } from 'storybook/test';
 
 /**
  * Native Image Gallery using Baseline features:

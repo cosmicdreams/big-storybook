@@ -1,5 +1,5 @@
 import '../../../src/components/baseline/color-system/dynamic-colors.css';
-import { expect, within } from '@storybook/test';
+import { expect, within } from 'storybook/test';
 
 export default {
   title: 'Baseline/ColorSystem',

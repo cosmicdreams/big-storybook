@@ -1,4 +1,4 @@
-import { expect, userEvent, within, fireEvent } from '@storybook/test';
+import { expect, userEvent, within, fireEvent } from 'storybook/test';
 import '../../../src/components/css-tricks/discoverability/discoverability.css';
 
 export default {

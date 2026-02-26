@@ -1,4 +1,4 @@
-import { expect, userEvent, within, waitFor } from '@storybook/test';
+import { expect, userEvent, within, waitFor } from 'storybook/test';
 import '../../../src/components/baseline/navigation/navigation.css';
 
 export default {

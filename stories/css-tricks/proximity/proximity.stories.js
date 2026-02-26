@@ -1,4 +1,4 @@
-import { expect, within } from '@storybook/test';
+import { expect, within } from 'storybook/test';
 import '../../../src/components/css-tricks/proximity/proximity.css';
 import { initProximity } from '../../../src/components/css-tricks/proximity/proximity.js';
 

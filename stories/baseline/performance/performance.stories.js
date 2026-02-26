@@ -1,4 +1,4 @@
-import { expect, within } from '@storybook/test';
+import { expect, within } from 'storybook/test';
 import '../../../src/components/baseline/performance/performance.css';
 
 export default {

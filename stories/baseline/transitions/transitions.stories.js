@@ -1,4 +1,4 @@
-import { within, userEvent, expect, waitFor } from '@storybook/test';
+import { within, userEvent, expect, waitFor } from 'storybook/test';
 import '../../../src/components/baseline/transitions/transitions.css';
 
 export default {

@@ -19,12 +19,12 @@ A "Shadcn-inspired" set of 30+ production-ready components built for the modern 
 - **Navigation**: Mega menus, functional tabs, breadcrumbs, and carousels.
 - **Overlays**: Native `<dialog>` modals, tooltips, and toast notifications.
 
-### 3. [Premium Visuals](./stories/modern-ui-kit/Premium.stories.js)
+### 3. [Codepen](./stories/codepen)
 Cinematic landing page effects for high-impact user experiences.
 - **Interactive Bento Grid**: The signature Apple-style feature grid with mouse-responsive glow.
 - **Retro Grid**: A scrolling 3D perspective "synthwave" floor with a stylized sun.
-- **Border Beam**: A high-end glowing beam that travels along container perimeters.
-- **Meteors & Aurora**: Atmospheric particle backgrounds and flowing text gradients.
+- **Aurora Text**: Flowing iridescent text gradient effects.
+- **Shimmer Button**: High-end shimmering button with animated highlight.
 
 ## 🛠️ Tech Stack & Tooling
 

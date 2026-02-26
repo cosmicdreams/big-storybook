@@ -1,4 +1,4 @@
-import { within, userEvent, expect, waitFor } from '@storybook/test';
+import { within, userEvent, expect, waitFor } from 'storybook/test';
 import '../../../src/components/baseline/popover/popover.css';
 
 export default {

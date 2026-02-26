@@ -1,5 +1,5 @@
 import '../../../src/components/baseline/anchor-positioning/anchor-positioning.css';
-import { expect, within, userEvent } from '@storybook/test';
+import { expect, within, userEvent } from 'storybook/test';
 
 export default {
   title: 'Baseline/AnchorPositioning',

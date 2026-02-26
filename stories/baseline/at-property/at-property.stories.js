@@ -1,4 +1,4 @@
-import { within, userEvent, expect, waitFor } from '@storybook/test';
+import { within, userEvent, expect, waitFor } from 'storybook/test';
 import '../../../src/components/baseline/at-property/at-property.css';
 
 export default {
