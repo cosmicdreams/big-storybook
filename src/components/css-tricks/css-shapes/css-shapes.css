@@ -1,0 +1,522 @@
+/* =============================================================
+   CSS shape() Function — Baseline Demo
+   Source: https://css-tricks.com/better-css-shapes-using-shape-part-1-lines-and-arcs/
+           https://css-tricks.com/better-css-shapes-using-shape-part-2-more-on-arcs/
+           https://css-tricks.com/better-css-shapes-using-shape-part-3-curves/
+
+   shape() requires Chrome 135+ / Edge 135+.
+   General syntax:
+     clip-path: shape(from X Y, <command>, <command>, ...);
+
+   Commands:
+     line to X Y          — straight line to absolute point
+     line by X Y          — straight line, relative offset
+     hline to X           — horizontal line to absolute X
+     vline to Y           — vertical line to absolute Y
+     arc to X Y of R [large|small] [cw|ccw]
+     arc by X Y of R [large|small] [cw|ccw]
+     curve to X Y with Xc Yc          — quadratic Bézier
+     curve to X Y with Xc1 Yc1 and Xc2 Yc2  — cubic Bézier
+   ============================================================= */
+
+/* ── Design tokens ── */
+:root {
+  --cs-violet:  #7c3aed;
+  --cs-indigo:  #4f46e5;
+  --cs-sky:     #0ea5e9;
+  --cs-teal:    #0d9488;
+  --cs-emerald: #059669;
+  --cs-lime:    #65a30d;
+  --cs-amber:   #d97706;
+  --cs-rose:    #e11d48;
+  --cs-pink:    #db2777;
+  --cs-fuchsia: #a21caf;
+
+  --cs-card-bg:   #ffffff;
+  --cs-page-bg:   #f8f7ff;
+  --cs-border:    #e5e7eb;
+  --cs-text:      #1e1b4b;
+  --cs-muted:     #6b7280;
+  --cs-code-bg:   #ede9fe;
+  --cs-code-text: #5b21b6;
+
+  --cs-radius: 10px;
+  --cs-gap:    24px;
+}
+
+/* ── Page wrapper ── */
+.css-shapes-demo {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: var(--cs-page-bg);
+  color: var(--cs-text);
+  padding: 40px 32px 56px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ── Header ── */
+.css-shapes-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.css-shapes-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+}
+
+.css-shapes-title code {
+  color: var(--cs-violet);
+  font-size: inherit;
+}
+
+.css-shapes-subtitle {
+  font-size: 1rem;
+  color: var(--cs-muted);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.css-shapes-subtitle code {
+  background: var(--cs-code-bg);
+  color: var(--cs-code-text);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* ── Sections ── */
+.css-shapes-section {
+  margin-bottom: 48px;
+}
+
+.css-shapes-section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cs-violet);
+  margin: 0 0 20px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--cs-border);
+}
+
+/* ── Card grid ── */
+.css-shapes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--cs-gap);
+}
+
+/* ── Individual card ── */
+.css-shapes-card {
+  background: var(--cs-card-bg);
+  border: 1px solid var(--cs-border);
+  border-radius: var(--cs-radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+/* ── Clipped shape box ── */
+.shape-box {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 4px; /* visible only where shape() doesn't fully cover */
+}
+
+/* ── Label ── */
+.shape-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.shape-label strong {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--cs-text);
+}
+
+.shape-label code {
+  font-size: 0.78rem;
+  background: var(--cs-code-bg);
+  color: var(--cs-code-text);
+  padding: 2px 6px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.shape-desc {
+  font-size: 0.82rem;
+  color: var(--cs-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.shape-desc code {
+  background: var(--cs-code-bg);
+  color: var(--cs-code-text);
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+
+/* ── Footer ── */
+.css-shapes-footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--cs-border);
+  font-size: 0.85rem;
+  color: var(--cs-muted);
+  text-align: center;
+}
+
+.css-shapes-footer a {
+  color: var(--cs-violet);
+  text-decoration: none;
+}
+
+.css-shapes-footer a:hover {
+  text-decoration: underline;
+}
+
+
+/* =============================================================
+   SHAPE VARIANTS
+   ============================================================= */
+
+/* ── 1. Rectangle ──────────────────────────────────────────────
+   Four explicit "line to" commands — the most verbose form,
+   but makes the path logic transparent.
+
+   shape(
+     from 0 0,          ← start top-left
+     line to 100% 0,    ← right along the top
+     line to 100% 100%, ← down the right side
+     line to 0 100%     ← left along the bottom (close is implied)
+   )
+   ─────────────────────────────────────────────────────────── */
+.shape--rectangle {
+  background: linear-gradient(135deg, var(--cs-indigo), var(--cs-violet));
+  clip-path: shape(
+    from 0 0,
+    line to 100% 0,
+    line to 100% 100%,
+    line to 0 100%
+  );
+}
+
+/* ── 2. Diagonal Cut ───────────────────────────────────────────
+   "hline to" and "vline to" are shorthand for horizontal and
+   vertical segments — only one coordinate needed.
+   The final "line to" creates the diagonal notch at top-right.
+
+   shape(
+     from 0 0,
+     hline to 70%,          ← horizontal to 70%
+     line to 100% 30%,      ← diagonal cut (top-right corner removed)
+     vline to 100%,         ← straight down
+     hline to 0             ← back left
+   )
+   ─────────────────────────────────────────────────────────── */
+.shape--diagonal-cut {
+  background: linear-gradient(135deg, var(--cs-sky), var(--cs-indigo));
+  clip-path: shape(
+    from 0 0,
+    hline to 70%,
+    line to 100% 30%,
+    vline to 100%,
+    hline to 0
+  );
+}
+
+/* ── 3. Arrow / Chevron ────────────────────────────────────────
+   All straight lines form an arrow pointing right.
+   shape() gives us precise control that polygon() also offers,
+   but with readable named commands.
+
+   shape(
+     from 0 15%,
+     hline to 60%,
+     line to 60% 0,
+     line to 100% 50%,  ← tip of the arrow
+     line to 60% 100%,
+     hline to 0,        ← note: closes to 0, 100% (implied vline)
+     vline to 60%,
+     hline to 60%,
+     line to 60% 85%,
+     hline to 0
+   )
+   ─────────────────────────────────────────────────────────── */
+.shape--arrow {
+  background: linear-gradient(135deg, var(--cs-teal), var(--cs-sky));
+  clip-path: shape(
+    from 0 15%,
+    hline to 60%,
+    vline to 0,
+    line to 100% 50%,
+    line to 60% 100%,
+    vline to 85%,
+    hline to 0
+  );
+}
+
+/* ── 4. Top Notch ──────────────────────────────────────────────
+   "arc by Δx Δy of R" draws an arc relative to current point.
+   A radius of 1px on a 2× diameter span forces a tight
+   semicircle. Default direction is ccw (counterclockwise),
+   which flips the arc inward creating the bite/notch effect.
+
+   shape(
+     from 0 0,
+     hline to calc(50% - var(--r)),
+     arc by calc(2 * var(--r)) 0 of 1px,  ← semicircle notch
+     hline to 100%,
+     vline to 100%,
+     hline to 0
+   )
+   ─────────────────────────────────────────────────────────── */
+.shape--notch {
+  --r: 28px;
+  background: linear-gradient(135deg, var(--cs-emerald), var(--cs-teal));
+  clip-path: shape(
+    from 0 0,
+    hline to calc(50% - var(--r)),
+    arc by calc(2 * var(--r)) 0 of 1px,
+    hline to 100%,
+    vline to 100%,
+    hline to 0
+  );
+}
+
+/* ── 5. Rounded Tab ────────────────────────────────────────────
+   Four quarter-circle arcs round the corners.
+   "cw" (clockwise) vs default "ccw" flips which side bulges.
+   Combining directions creates outward-rounded corners.
+
+   Each arc uses:
+     arc by Δx Δy of R [cw]
+   where Δx/Δy represents the diagonal step of the quarter circle.
+
+   Source: CSS-Tricks Part 1
+   ─────────────────────────────────────────────────────────── */
+.shape--tab {
+  --r: 20px;
+  background: linear-gradient(135deg, var(--cs-amber), var(--cs-lime));
+  clip-path: shape(
+    from 0 100%,
+    /* bottom-left corner: arc up-right */
+    arc by var(--r) calc(-1 * var(--r)) of var(--r),
+    /* left side up to top-left corner */
+    vline to var(--r),
+    /* top-left corner: arc right, cw = outward curve */
+    arc by var(--r) calc(-1 * var(--r)) of var(--r) cw,
+    /* top edge */
+    hline to calc(100% - 2 * var(--r)),
+    /* top-right corner: arc down, cw */
+    arc by var(--r) var(--r) of var(--r) cw,
+    /* right side down to bottom-right */
+    vline to calc(100% - var(--r)),
+    /* bottom-right corner: arc left, ccw (default) */
+    arc by var(--r) var(--r) of var(--r)
+  );
+}
+
+/* ── 6. Pie Sector ─────────────────────────────────────────────
+   Maps a CSS variable --v (0–100) onto a pie wedge using
+   trigonometric functions (sin/cos) available in modern CSS.
+
+   Point on circle circumference:
+     X = 50% + 50% * sin(v * 3.6deg)
+     Y = 50% - 50% * cos(v * 3.6deg)
+
+   "large cw" handles angles greater than 180°.
+   A tiny cap (min 99.99) prevents a 100% arc collapsing to 0.
+
+   Source: CSS-Tricks Part 2
+   ─────────────────────────────────────────────────────────── */
+.shape--sector {
+  --v: 65; /* value 0–100 */
+  --_v: min(99.99, var(--v));
+  background: conic-gradient(var(--cs-rose) 0deg, var(--cs-fuchsia) 360deg);
+  border-radius: 50%;
+  clip-path: shape(
+    from 50% 0%,
+    arc to calc(50% + 50% * sin(var(--_v) * 3.6deg))
+           calc(50% - 50% * cos(var(--_v) * 3.6deg))
+         of 50% large cw,
+    line to 50% 50%
+  );
+}
+
+/* ── 7. Scallop Edge ───────────────────────────────────────────
+   Six small "arc by" commands along the bottom edge create a
+   repeating scalloped / shell pattern.
+   "small cw" = convex bumps pointing downward.
+
+   Each scallop: arc by (width/n) 0 of (width/2n) small cw
+   ─────────────────────────────────────────────────────────── */
+.shape--scallop {
+  background: linear-gradient(180deg, var(--cs-pink), var(--cs-rose));
+  /* Six scallops: each spans ~16.67% of width, radius = half that */
+  clip-path: shape(
+    from 0 0,
+    hline to 100%,
+    vline to 85%,
+    /* 6 scallop arcs — "small cw" makes them convex (bump down) */
+    arc by calc(-100% / 6) 0 of calc(100% / 12) small cw,
+    arc by calc(-100% / 6) 0 of calc(100% / 12) small cw,
+    arc by calc(-100% / 6) 0 of calc(100% / 12) small cw,
+    arc by calc(-100% / 6) 0 of calc(100% / 12) small cw,
+    arc by calc(-100% / 6) 0 of calc(100% / 12) small cw,
+    arc by calc(-100% / 6) 0 of calc(100% / 12) small cw,
+    vline to 0
+  );
+}
+
+/* ── 8. Wave Bottom ────────────────────────────────────────────
+   Quadratic Bézier via "curve to X Y with Xc Yc".
+   The "with" point is the single control point that pulls the
+   line into a curve — analogous to SVG's Q command.
+
+   Two opposing curves side-by-side create a sine-wave bottom:
+     First curve: control point pushed DOWN (below box)
+     Second curve: control point pushed UP (into box)
+
+   Source: CSS-Tricks Part 3
+   ─────────────────────────────────────────────────────────── */
+.shape--wave {
+  background: linear-gradient(135deg, var(--cs-sky), var(--cs-teal));
+  clip-path: shape(
+    from 0 0,
+    hline to 100%,
+    vline to 75%,
+    /* Wave: two quadratic Bézier arcs with opposing control points */
+    curve to 50% 75% with 25% 105%,    /* first hump — control point below */
+    curve to 100% 75% with 75% 45%,    /* second hump — control point above */
+    vline to 100%,
+    hline to 0
+  );
+}
+
+/* ── 9. Slanted Shoulder with Curve ───────────────────────────
+   A shape with a slanted top-right corner smoothed by a curve.
+   "line to" builds the body; "curve to … with" rounds the
+   transition from the diagonal into the straight right edge.
+
+   Based on the slanted-edge example from CSS-Tricks Part 3.
+   ─────────────────────────────────────────────────────────── */
+.shape--slant-curve {
+  --s: 40px; /* slant size */
+  --r: 14px; /* curve radius at shoulder */
+  background: linear-gradient(135deg, var(--cs-lime), var(--cs-emerald));
+  clip-path: shape(
+    from 0 0,
+    /* top edge up to the start of the slant */
+    hline to calc(100% - var(--s) - var(--r)),
+    /* quadratic curve rounds the shoulder of the slant */
+    curve to calc(100% - var(--s) + var(--r)) calc(var(--s) - var(--r))
+           with calc(100% - var(--s) + var(--r)) 0,
+    /* diagonal slant line */
+    line to calc(100% - var(--r)) calc(var(--s) + var(--r)),
+    /* curve at bottom of slant transitions to vertical right edge */
+    curve to 100% calc(var(--s) + var(--r) * 2)
+           with 100% calc(var(--s)),
+    /* straight down and back around */
+    vline to 100%,
+    hline to 0
+  );
+}
+
+/* ── 10. Organic Blob ──────────────────────────────────────────
+   Four quadratic Bézier curves — each "curve to … with" pulls
+   a side outward or inward with its control point to produce
+   an asymmetric organic silhouette.
+
+   Control points are deliberately offset from the midpoints
+   to create varied bulge sizes per side.
+   ─────────────────────────────────────────────────────────── */
+.shape--blob {
+  background: radial-gradient(ellipse at 40% 40%, var(--cs-fuchsia), var(--cs-violet));
+  clip-path: shape(
+    from 10% 5%,
+    /* top edge — bulges slightly upward */
+    curve to 90% 8%  with 50% -8%,
+    /* right edge — larger rightward bulge */
+    curve to 95% 88% with 115% 50%,
+    /* bottom edge — bulges downward-left */
+    curve to 8%  92% with 40% 110%,
+    /* left edge — slight inward pinch */
+    curve to 10% 5%  with -10% 40%
+  );
+}
+
+/* ── 11. Speech Bubble ─────────────────────────────────────────
+   Combines arc-rounded corners with a line-to tail triangle.
+   The bubble body is a rounded rectangle built with arcs at
+   each corner; a pointed tail juts out from the bottom-left
+   area using two "line to" commands.
+   ─────────────────────────────────────────────────────────── */
+.shape--speech-bubble {
+  --r: 16px;
+  background: linear-gradient(135deg, var(--cs-amber), var(--cs-rose));
+  clip-path: shape(
+    /* start at top-left after corner */
+    from var(--r) 0,
+    /* top edge, then top-right arc */
+    hline to calc(100% - var(--r)),
+    arc by var(--r) var(--r) of var(--r) cw,
+    /* right edge, then bottom-right arc */
+    vline to calc(80% - var(--r)),
+    arc by calc(-1 * var(--r)) var(--r) of var(--r) cw,
+    /* bottom edge right section (right of tail) */
+    hline to 40%,
+    /* tail: point downward then back up */
+    line to 28% 100%,
+    line to 20% 80%,
+    /* bottom edge left section */
+    hline to var(--r),
+    /* bottom-left arc */
+    arc by calc(-1 * var(--r)) calc(-1 * var(--r)) of var(--r) cw,
+    /* left edge, then top-left arc */
+    vline to var(--r),
+    arc by var(--r) calc(-1 * var(--r)) of var(--r) cw
+  );
+}
+
+/* ── 12. Badge / Shield ────────────────────────────────────────
+   Flat top with arc-rounded upper corners, straight sides,
+   and a curve-pointed bottom — classic shield / badge form.
+
+   Upper corners use "arc by … cw" quarter circles.
+   The pointed bottom uses two "curve to … with" commands,
+   each curving inward to the center point.
+   ─────────────────────────────────────────────────────────── */
+.shape--badge {
+  --r: 18px;
+  background: linear-gradient(180deg, var(--cs-indigo), var(--cs-violet), var(--cs-rose));
+  clip-path: shape(
+    /* top-left corner start */
+    from var(--r) 0,
+    /* flat top */
+    hline to calc(100% - var(--r)),
+    /* top-right rounded corner */
+    arc by var(--r) var(--r) of var(--r) cw,
+    /* right side down to about 65% */
+    vline to 65%,
+    /* bottom-right curve meeting the central point */
+    curve to 50% 100% with 100% 88%,
+    /* bottom-left curve back up */
+    curve to 0 65% with 0 88%,
+    /* left side back up to start */
+    vline to var(--r),
+    /* top-left rounded corner */
+    arc by var(--r) calc(-1 * var(--r)) of var(--r) cw
+  );
+}
