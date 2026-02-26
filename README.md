@@ -52,8 +52,6 @@ Cinematic landing page effects sourced and adapted from the web.
 |:---|:---|
 | `aurora-text` | Flowing gradient text animation |
 | `bento-grid` | Apple-style feature grid with mouse-responsive glow |
-| `border-beam` | Glowing beam traveling along container perimeters |
-| `meteors` | Atmospheric particle rain background |
 | `retro-grid` | Scrolling 3D perspective synthwave floor |
 | `shimmer-button` | Shimmer sweep CTA button |
 
