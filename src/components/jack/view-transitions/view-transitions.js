@@ -177,6 +177,12 @@ export function initViewTransitionsDemo(root) {
 
   backBtn.addEventListener('click', closeSession);
 
+  root.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !detailView.hidden) {
+      closeSession();
+    }
+  });
+
   // Expose for testing
   return { openSession, closeSession };
 }
