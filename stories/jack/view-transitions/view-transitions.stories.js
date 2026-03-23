@@ -1,11 +1,11 @@
 import { within, userEvent, expect, waitFor } from 'storybook/test';
-import '../../../src/components/baseline/view-transitions/view-transitions.css';
+import '../../../src/components/jack/view-transitions/view-transitions.css';
 import '../../../css/modern-ui-kit/globals.css';
-import { initViewTransitionsDemo } from '../../../src/components/baseline/view-transitions/view-transitions.js';
-import rawHtml from '../../../src/components/baseline/view-transitions/view-transitions.html?raw';
+import { initViewTransitionsDemo } from '../../../src/components/jack/view-transitions/view-transitions.js';
+import rawHtml from '../../../src/components/jack/view-transitions/view-transitions.html?raw';
 
 export default {
-  title: 'Baseline/ViewTransitions',
+  title: 'Jack/ViewTransitions',
   parameters: {
     layout: 'fullscreen',
   },
