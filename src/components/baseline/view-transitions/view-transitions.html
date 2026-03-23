@@ -1,0 +1,140 @@
+<!-- View Transitions API — DrupalCon Session Cards -->
+<div class="dc-app" id="dc-app">
+
+  <!-- Session Grid View -->
+  <div class="dc-grid-view" id="dc-grid-view">
+    <header class="dc-site-header">
+      <div class="dc-site-header-inner">
+        <span class="dc-logo">DrupalCon</span>
+        <span class="dc-tagline">Session Schedule</span>
+      </div>
+    </header>
+
+    <main class="dc-grid-main">
+      <div class="dc-session-grid" id="dc-session-grid">
+
+        <article class="dc-card" data-session="1" tabindex="0">
+          <div class="dc-card-track dc-track--frontend">Frontend</div>
+          <h2 class="dc-card-title">The Future of CSS: Anchor Positioning &amp; Scroll-Driven Animations</h2>
+          <p class="dc-card-speaker">Miriam Suzanne</p>
+          <div class="dc-card-meta">
+            <span class="dc-card-time">Mon 10:00 AM</span>
+            <span class="dc-card-room">Hall A</span>
+          </div>
+        </article>
+
+        <article class="dc-card" data-session="2" tabindex="0">
+          <div class="dc-card-track dc-track--backend">Backend</div>
+          <h2 class="dc-card-title">Scaling Drupal: Multi-Site Architecture at Enterprise</h2>
+          <p class="dc-card-speaker">Fabian Franz</p>
+          <div class="dc-card-meta">
+            <span class="dc-card-time">Mon 11:30 AM</span>
+            <span class="dc-card-room">Hall B</span>
+          </div>
+        </article>
+
+        <article class="dc-card" data-session="3" tabindex="0">
+          <div class="dc-card-track dc-track--devops">DevOps</div>
+          <h2 class="dc-card-title">Zero-Downtime Deploys with Tugboat and Acquia Cloud</h2>
+          <p class="dc-card-speaker">Alanna Burke</p>
+          <div class="dc-card-meta">
+            <span class="dc-card-time">Mon 2:00 PM</span>
+            <span class="dc-card-room">Workshop 1</span>
+          </div>
+        </article>
+
+        <article class="dc-card" data-session="4" tabindex="0">
+          <div class="dc-card-track dc-track--ux">UX &amp; Design</div>
+          <h2 class="dc-card-title">Component-Driven Design Systems in Site Studio</h2>
+          <p class="dc-card-speaker">Cristina Chumillas</p>
+          <div class="dc-card-meta">
+            <span class="dc-card-time">Tue 9:00 AM</span>
+            <span class="dc-card-room">Hall C</span>
+          </div>
+        </article>
+
+        <article class="dc-card" data-session="5" tabindex="0">
+          <div class="dc-card-track dc-track--community">Community</div>
+          <h2 class="dc-card-title">Mentoring the Next Generation of Drupal Contributors</h2>
+          <p class="dc-card-speaker">Dries Buytaert</p>
+          <div class="dc-card-meta">
+            <span class="dc-card-time">Tue 11:00 AM</span>
+            <span class="dc-card-room">Keynote Hall</span>
+          </div>
+        </article>
+
+        <article class="dc-card" data-session="6" tabindex="0">
+          <div class="dc-card-track dc-track--frontend">Frontend</div>
+          <h2 class="dc-card-title">View Transitions API: Native App Feel on the Web</h2>
+          <p class="dc-card-speaker">Jake Archibald</p>
+          <div class="dc-card-meta">
+            <span class="dc-card-time">Tue 2:30 PM</span>
+            <span class="dc-card-room">Hall A</span>
+          </div>
+        </article>
+
+        <article class="dc-card" data-session="7" tabindex="0">
+          <div class="dc-card-track dc-track--backend">Backend</div>
+          <h2 class="dc-card-title">GraphQL Decoupled Drupal: Lessons from Production</h2>
+          <p class="dc-card-speaker">Preston So</p>
+          <div class="dc-card-meta">
+            <span class="dc-card-time">Wed 10:00 AM</span>
+            <span class="dc-card-room">Hall B</span>
+          </div>
+        </article>
+
+        <article class="dc-card" data-session="8" tabindex="0">
+          <div class="dc-card-track dc-track--devops">DevOps</div>
+          <h2 class="dc-card-title">Automating Accessibility Audits in CI/CD Pipelines</h2>
+          <p class="dc-card-speaker">Mike Gifford</p>
+          <div class="dc-card-meta">
+            <span class="dc-card-time">Wed 1:00 PM</span>
+            <span class="dc-card-room">Workshop 2</span>
+          </div>
+        </article>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Session Detail View (hidden initially) -->
+  <div class="dc-detail-view" id="dc-detail-view" hidden>
+    <div class="dc-detail-hero" id="dc-detail-hero">
+      <div class="dc-detail-hero-inner">
+        <button class="dc-back-btn" id="dc-back-btn" aria-label="Back to sessions">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          All Sessions
+        </button>
+        <div class="dc-detail-track" id="dc-detail-track"></div>
+        <h1 class="dc-detail-title" id="dc-detail-title"></h1>
+        <p class="dc-detail-speaker" id="dc-detail-speaker"></p>
+      </div>
+    </div>
+
+    <div class="dc-detail-body">
+      <div class="dc-detail-body-inner">
+        <div class="dc-detail-info-row">
+          <div class="dc-detail-info-item">
+            <span class="dc-detail-label">Time</span>
+            <span class="dc-detail-value" id="dc-detail-time"></span>
+          </div>
+          <div class="dc-detail-info-item">
+            <span class="dc-detail-label">Room</span>
+            <span class="dc-detail-value" id="dc-detail-room"></span>
+          </div>
+          <div class="dc-detail-info-item">
+            <span class="dc-detail-label">Track</span>
+            <span class="dc-detail-value" id="dc-detail-track-text"></span>
+          </div>
+        </div>
+        <div class="dc-detail-description">
+          <h2>About this Session</h2>
+          <p id="dc-detail-desc"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
