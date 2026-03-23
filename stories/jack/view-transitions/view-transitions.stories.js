@@ -27,6 +27,14 @@ export const SessionGrid = {
     requestAnimationFrame(() => initViewTransitionsDemo(root));
     return root;
   },
+};
+
+export const InteractionTests = {
+  render: () => {
+    const root = makeRoot();
+    requestAnimationFrame(() => initViewTransitionsDemo(root));
+    return root;
+  },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
