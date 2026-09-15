@@ -109,7 +109,8 @@ export function initViewTransitionsDemo(root) {
       callback();
       return;
     }
-    document.startViewTransition(callback);
+    const transition = document.startViewTransition(callback);
+    transition?.finished?.catch?.(() => {});
   }
 
   function openSession(sessionId) {
