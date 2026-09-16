@@ -1,0 +1,365 @@
+/* View Transitions API — DrupalCon Session Cards */
+
+:root {
+  --dc-duration: 0.35s;
+  --dc-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Track colors */
+  --dc-track-frontend: #6366f1;
+  --dc-track-frontend-bg: #eef2ff;
+  --dc-track-backend: #059669;
+  --dc-track-backend-bg: #d1fae5;
+  --dc-track-devops: #d97706;
+  --dc-track-devops-bg: #fef3c7;
+  --dc-track-ux: #ec4899;
+  --dc-track-ux-bg: #fce7f3;
+  --dc-track-community: #7c3aed;
+  --dc-track-community-bg: #ede9fe;
+}
+
+/* ============================================================
+   App shell
+   ============================================================ */
+
+.dc-app {
+  font-family: 'Inter', system-ui, sans-serif;
+  min-height: 100vh;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+/* ============================================================
+   Grid view — site header
+   ============================================================ */
+
+.dc-site-header {
+  background: #1e1b4b;
+  color: #fff;
+  padding: 0 1.5rem;
+}
+
+.dc-site-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dc-logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #a5b4fc;
+}
+
+.dc-tagline {
+  font-size: 0.875rem;
+  color: #c7d2fe;
+  padding-left: 1rem;
+  border-left: 1px solid #3730a3;
+}
+
+/* ============================================================
+   Grid view — session grid
+   ============================================================ */
+
+.dc-grid-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.dc-session-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .dc-session-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .dc-session-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ============================================================
+   Session card
+   ============================================================ */
+
+.dc-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  cursor: pointer;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  transition: box-shadow 0.2s var(--dc-ease), transform 0.2s var(--dc-ease);
+  /* Each card gets its own view-transition-name set via JS */
+}
+
+.dc-card:hover,
+.dc-card:focus-visible {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.dc-card:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+/* Track badge */
+.dc-card-track {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  align-self: flex-start;
+}
+
+.dc-track--frontend {
+  background: var(--dc-track-frontend-bg);
+  color: var(--dc-track-frontend);
+}
+.dc-track--backend {
+  background: var(--dc-track-backend-bg);
+  color: var(--dc-track-backend);
+}
+.dc-track--devops {
+  background: var(--dc-track-devops-bg);
+  color: var(--dc-track-devops);
+}
+.dc-track--ux {
+  background: var(--dc-track-ux-bg);
+  color: var(--dc-track-ux);
+}
+.dc-track--community {
+  background: var(--dc-track-community-bg);
+  color: var(--dc-track-community);
+}
+
+.dc-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0;
+  color: #0f172a;
+}
+
+.dc-card-speaker {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin: 0;
+  font-weight: 500;
+}
+
+.dc-card-meta {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.dc-card-time,
+.dc-card-room {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* ============================================================
+   Detail view
+   ============================================================ */
+
+.dc-detail-view {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.dc-detail-view[hidden] {
+  display: none;
+}
+
+/* Hero section — morphs from card via view-transition */
+.dc-detail-hero {
+  background: #1e1b4b;
+  color: #fff;
+  padding: 0 1.5rem;
+  /* view-transition-name set via JS to match the clicked card */
+}
+
+.dc-detail-hero-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 0 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dc-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #c7d2fe;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.15s;
+}
+
+.dc-back-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dc-detail-track {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  align-self: flex-start;
+}
+
+.dc-detail-title {
+  font-size: clamp(1.375rem, 3vw, 2rem);
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0;
+  color: #fff;
+  /* view-transition-name set via JS to match the card title */
+}
+
+.dc-detail-speaker {
+  font-size: 1rem;
+  color: #a5b4fc;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Detail body */
+.dc-detail-body {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.dc-detail-body-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.dc-detail-info-row {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.dc-detail-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.dc-detail-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.dc-detail-value {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.dc-detail-description h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 0.75rem;
+}
+
+.dc-detail-description p {
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: #475569;
+  margin: 0;
+}
+
+/* ============================================================
+   View Transition pseudo-elements
+   ============================================================ */
+
+/* Default page-level crossfade */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--dc-duration);
+  animation-timing-function: var(--dc-ease);
+}
+
+/* Card hero morph — smooth position+size morph, no separate fade */
+::view-transition-old(dc-card-hero),
+::view-transition-new(dc-card-hero) {
+  animation-duration: var(--dc-duration);
+  animation-timing-function: var(--dc-ease);
+  mix-blend-mode: normal;
+}
+
+/* Title morph */
+::view-transition-old(dc-card-title),
+::view-transition-new(dc-card-title) {
+  animation-duration: var(--dc-duration);
+  animation-timing-function: var(--dc-ease);
+  mix-blend-mode: normal;
+}
+
+/* Background content fades in from slight offset */
+@keyframes dc-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes dc-fade-down {
+  to {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+::view-transition-new(dc-detail-body) {
+  animation: var(--dc-duration) var(--dc-ease) both dc-fade-up;
+}
+
+::view-transition-old(dc-detail-body) {
+  animation: var(--dc-duration) var(--dc-ease) both dc-fade-down;
+}
