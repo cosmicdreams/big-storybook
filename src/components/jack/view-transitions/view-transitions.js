@@ -110,6 +110,7 @@ export function initViewTransitionsDemo(root) {
       return;
     }
     const transition = document.startViewTransition(callback);
+    transition?.ready?.catch?.(() => {});
     transition?.finished?.catch?.(() => {});
   }
 

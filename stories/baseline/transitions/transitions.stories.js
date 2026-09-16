@@ -21,6 +21,7 @@ const startTransition = (updateCallback) => {
     return;
   }
   const vt = document.startViewTransition(updateCallback);
+  vt?.ready?.catch?.(() => {});
   vt?.finished?.catch?.(() => {});
 };
 
@@ -96,7 +97,7 @@ export const ListReordering = {
     const container = document.createElement('div');
     container.innerHTML = `
       <div style="display:flex; flex-direction:column; align-items:center; gap:24px;">
-        <button id=\"shuffle-btn\" style="padding: 10px 20px; border-radius: 8px; border: 1px solid #ccc; cursor: pointer;">Shuffle Tasks</button>
+        <button id="shuffle-btn" style="padding: 10px 20px; border-radius: 8px; border: 1px solid #ccc; cursor: pointer;">Shuffle Tasks</button>
         <div class="vt-list" id="vt-list">
           <div class="vt-list-item" style="view-transition-name: item-1">${args.item1} <span>Urgent</span></div>
           <div class="vt-list-item" style="view-transition-name: item-2">${args.item2} <span>Medium</span></div>
