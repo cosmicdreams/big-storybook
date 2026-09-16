@@ -109,7 +109,9 @@ export function initViewTransitionsDemo(root) {
       callback();
       return;
     }
-    document.startViewTransition(callback);
+    const transition = document.startViewTransition(callback);
+    transition?.ready?.catch?.(() => {});
+    transition?.finished?.catch?.(() => {});
   }
 
   function openSession(sessionId) {
@@ -176,6 +178,12 @@ export function initViewTransitionsDemo(root) {
   });
 
   backBtn.addEventListener('click', closeSession);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !detailView.hidden) {
+      closeSession();
+    }
+  });
 
   // Expose for testing
   return { openSession, closeSession };

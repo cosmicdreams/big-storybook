@@ -1,0 +1,473 @@
+/* ── Box Model Educational Series ──────────────────────────────────────────── */
+
+.box-model-demo {
+  font-family: system-ui, -apple-system, sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #1a1a1a;
+  line-height: 1.6;
+}
+
+.box-model-demo h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.box-model-demo .subtitle {
+  font-size: 1rem;
+  color: #555;
+  margin: 0 0 32px;
+}
+
+.box-model-demo h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 16px;
+  color: #333;
+}
+
+.box-model-demo p {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0 0 16px;
+}
+
+.box-model-demo code {
+  background: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+.box-model-demo .note {
+  background: #eff6ff;
+  border-left: 3px solid #3b82f6;
+  padding: 12px 16px;
+  border-radius: 0 6px 6px 0;
+  font-size: 0.85rem;
+  color: #1e40af;
+  margin: 16px 0;
+}
+
+/* ── Anatomy diagram ──────────────────────────────────────────────────────── */
+
+.box-anatomy {
+  display: flex;
+  justify-content: center;
+  margin: 24px 0 32px;
+}
+
+.box-anatomy-layers {
+  position: relative;
+  width: 380px;
+  height: 300px;
+}
+
+.box-layer {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.box-layer--margin {
+  inset: 0;
+  background: #fef3c7;
+  border: 2px dashed #f59e0b;
+  color: #92400e;
+}
+
+.box-layer--border {
+  inset: 40px;
+  background: #fecaca;
+  border: 4px solid #ef4444;
+  color: #991b1b;
+}
+
+.box-layer--padding {
+  inset: 70px;
+  background: #bbf7d0;
+  border: 2px dashed #22c55e;
+  color: #166534;
+}
+
+.box-layer--content {
+  inset: 110px;
+  background: #bfdbfe;
+  border: 2px solid #3b82f6;
+  color: #1e3a8a;
+}
+
+.box-layer-label {
+  position: absolute;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.box-layer--margin > .box-layer-label { top: 10px; left: 14px; color: #92400e; }
+.box-layer--border > .box-layer-label { top: 8px; left: 10px; color: #991b1b; }
+.box-layer--padding > .box-layer-label { top: 6px; left: 8px; color: #166534; }
+
+/* ── Comparison cards ─────────────────────────────────────────────────────── */
+
+.box-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 16px 0 32px;
+}
+
+.box-compare-card {
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.box-compare-card h3 {
+  margin: 0;
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-compare-card .card-body {
+  padding: 20px;
+}
+
+.box-compare-card .card-note {
+  padding: 10px 16px;
+  font-size: 0.8rem;
+  color: #555;
+  background: #fafafa;
+  border-top: 1px solid #e5e5e5;
+}
+
+/* ── box-sizing demo ──────────────────────────────────────────────────────── */
+
+.sizing-demo-box {
+  width: 250px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #fff;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.sizing-content-box {
+  box-sizing: content-box;
+  background: #ef4444;
+  padding: 20px;
+  border: 4px solid #991b1b;
+}
+
+.sizing-border-box {
+  box-sizing: border-box;
+  background: #3b82f6;
+  padding: 20px;
+  border: 4px solid #1e3a8a;
+}
+
+.sizing-ruler {
+  position: relative;
+  width: 250px;
+  height: 24px;
+  background: repeating-linear-gradient(
+    90deg,
+    #e5e5e5 0px,
+    #e5e5e5 1px,
+    transparent 1px,
+    transparent 25px
+  );
+  border-bottom: 2px solid #333;
+  margin: 4px 0 16px;
+  font-size: 0.65rem;
+  color: #555;
+}
+
+.sizing-ruler::before {
+  content: '250px';
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.sizing-ruler-wide {
+  width: 298px;
+}
+
+.sizing-ruler-wide::before {
+  content: '298px (250 + 20×2 pad + 4×2 border)';
+}
+
+/* ── Margin behaviors ─────────────────────────────────────────────────────── */
+
+.margin-demo-container {
+  border: 2px solid #e5e5e5;
+  border-radius: 6px;
+  padding: 16px;
+  background: #fafafa;
+}
+
+.margin-demo-box {
+  background: #dbeafe;
+  border: 2px solid #3b82f6;
+  padding: 16px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #1e3a8a;
+  text-align: center;
+}
+
+.margin-collapse-a {
+  margin-bottom: 30px;
+}
+
+.margin-collapse-b {
+  margin-top: 30px;
+}
+
+.margin-no-collapse-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.margin-auto-box {
+  width: 200px;
+  margin: 0 auto;
+}
+
+.margin-push-box {
+  width: 200px;
+  margin-left: auto;
+}
+
+.margin-negative-box {
+  margin-top: -20px;
+  position: relative;
+  z-index: 1;
+  background: #fef3c7;
+  border-color: #f59e0b;
+  color: #92400e;
+}
+
+/* ── Padding vs Margin visual ─────────────────────────────────────────────── */
+
+.pm-demo {
+  display: flex;
+  gap: 32px;
+  margin: 16px 0;
+}
+
+.pm-box {
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.pm-padding-box {
+  background: #dcfce7;
+  border: 2px solid #22c55e;
+  padding: 40px;
+  color: #166534;
+}
+
+.pm-margin-outer {
+  background: #fef3c7;
+  border-radius: 6px;
+  padding: 0; /* the yellow is the margin visualization */
+}
+
+.pm-margin-box {
+  background: #dbeafe;
+  border: 2px solid #3b82f6;
+  padding: 16px;
+  margin: 40px;
+  border-radius: 6px;
+  color: #1e3a8a;
+}
+
+/* ── Display type demos ───────────────────────────────────────────────────── */
+
+.display-demo-container {
+  border: 2px solid #e5e5e5;
+  border-radius: 6px;
+  padding: 16px;
+  background: #fafafa;
+  line-height: 2;
+}
+
+.display-inline {
+  background: #dbeafe;
+  border: 2px solid #3b82f6;
+  padding: 4px 12px;
+  color: #1e3a8a;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.display-inline-block {
+  display: inline-block;
+  background: #dcfce7;
+  border: 2px solid #22c55e;
+  padding: 12px 20px;
+  color: #166534;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.display-block {
+  display: block;
+  background: #fef3c7;
+  border: 2px solid #f59e0b;
+  padding: 12px 20px;
+  color: #92400e;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+/* ── Overflow demos ───────────────────────────────────────────────────────── */
+
+.overflow-demo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.overflow-demo-cell {
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.overflow-demo-cell h4 {
+  margin: 0;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.overflow-box {
+  width: 100%;
+  height: 100px;
+  padding: 12px;
+  font-size: 0.75rem;
+  color: #555;
+  line-height: 1.5;
+  background: #fff;
+}
+
+.overflow-visible { overflow: visible; }
+.overflow-hidden  { overflow: hidden; }
+.overflow-scroll  { overflow: scroll; }
+.overflow-auto    { overflow: auto; }
+
+/* ── Intrinsic sizing ─────────────────────────────────────────────────────── */
+
+.intrinsic-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.intrinsic-box {
+  background: #dbeafe;
+  border: 2px solid #3b82f6;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #1e3a8a;
+}
+
+.intrinsic-max-content { width: max-content; }
+.intrinsic-min-content { width: min-content; }
+.intrinsic-fit-content { width: fit-content; }
+
+/* ── Aspect ratio ─────────────────────────────────────────────────────────── */
+
+.aspect-demo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.aspect-box {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  min-height: 60px;
+}
+
+.aspect-1-1   { aspect-ratio: 1 / 1; }
+.aspect-16-9  { aspect-ratio: 16 / 9; }
+.aspect-4-3   { aspect-ratio: 4 / 3; }
+
+/* ── Logical properties ───────────────────────────────────────────────────── */
+
+.logical-demo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 16px 0;
+}
+
+.logical-box {
+  background: #dbeafe;
+  border: 2px solid #3b82f6;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #1e3a8a;
+  text-align: center;
+}
+
+.logical-physical {
+  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border-top: 4px solid #ef4444;
+  border-bottom: 4px solid #ef4444;
+}
+
+.logical-logical {
+  padding-block: 10px;
+  padding-inline: 30px;
+  margin-block: 16px;
+  border-block: 4px solid #22c55e;
+}

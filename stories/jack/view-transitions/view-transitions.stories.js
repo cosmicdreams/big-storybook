@@ -1,11 +1,11 @@
 import { within, userEvent, expect, waitFor } from 'storybook/test';
-import '../../../src/components/baseline/view-transitions/view-transitions.css';
+import '../../../src/components/jack/view-transitions/view-transitions.css';
 import '../../../css/modern-ui-kit/globals.css';
-import { initViewTransitionsDemo } from '../../../src/components/baseline/view-transitions/view-transitions.js';
-import rawHtml from '../../../src/components/baseline/view-transitions/view-transitions.html?raw';
+import { initViewTransitionsDemo } from '../../../src/components/jack/view-transitions/view-transitions.js';
+import rawHtml from '../../../src/components/jack/view-transitions/view-transitions.html?raw';
 
 export default {
-  title: 'Baseline/ViewTransitions',
+  title: 'Jack/ViewTransitions',
   parameters: {
     layout: 'fullscreen',
   },
@@ -24,12 +24,18 @@ function makeRoot() {
 export const SessionGrid = {
   render: () => {
     const root = makeRoot();
-    requestAnimationFrame(() => initViewTransitionsDemo(root));
+    initViewTransitionsDemo(root);
+    return root;
+  },
+};
+
+export const InteractionTests = {
+  render: () => {
+    const root = makeRoot();
+    initViewTransitionsDemo(root);
     return root;
   },
   play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
     await step('Grid renders 8 cards', async () => {
       const cards = canvasElement.querySelectorAll('.dc-card');
       await expect(cards.length).toBe(8);
@@ -44,15 +50,21 @@ export const SessionGrid = {
         expect(detailView.hidden).toBe(false);
       });
 
+      const detailView = canvasElement.querySelector('#dc-detail-view');
+      const detailCanvas = within(detailView);
+
       await expect(
-        canvas.getByText('The Future of CSS: Anchor Positioning & Scroll-Driven Animations'),
+        detailCanvas.getByText('The Future of CSS: Anchor Positioning & Scroll-Driven Animations'),
       ).toBeVisible();
     });
 
     await step('Detail view shows correct session info', async () => {
-      await expect(canvas.getByText('Miriam Suzanne')).toBeVisible();
-      await expect(canvas.getByText('Hall A')).toBeVisible();
-      await expect(canvas.getByText('Mon 10:00 AM')).toBeVisible();
+      const detailView = canvasElement.querySelector('#dc-detail-view');
+      const detailCanvas = within(detailView);
+
+      await expect(detailCanvas.getByText('Miriam Suzanne')).toBeVisible();
+      await expect(detailCanvas.getByText('Hall A')).toBeVisible();
+      await expect(detailCanvas.getByText('Mon 10:00 AM')).toBeVisible();
     });
 
     await step('Back button returns to grid', async () => {
@@ -76,10 +88,8 @@ export const SessionGrid = {
 export const DetailView = {
   render: () => {
     const root = makeRoot();
-    requestAnimationFrame(() => {
-      const { openSession } = initViewTransitionsDemo(root);
-      requestAnimationFrame(() => openSession('6'));
-    });
+    const { openSession } = initViewTransitionsDemo(root);
+    requestAnimationFrame(() => openSession('6'));
     return root;
   },
 };

@@ -20,7 +20,9 @@ const startTransition = (updateCallback) => {
     updateCallback();
     return;
   }
-  document.startViewTransition(updateCallback);
+  const vt = document.startViewTransition(updateCallback);
+  vt?.ready?.catch?.(() => {});
+  vt?.finished?.catch?.(() => {});
 };
 
 export const StateTransition = {

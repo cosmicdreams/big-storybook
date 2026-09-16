@@ -7,23 +7,22 @@ import { fileURLToPath } from 'node:url';
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-    plugins: [
-        storybookTest({
-            configDir: path.join(dirname, '.storybook'),
-        }),
-    ],
-    test: {
-        name: 'storybook',
-        browser: {
-            enabled: true,
-            instances: [
-                {
-                    browser: 'chromium',
-                },
-            ],
-            provider: playwright(),
-            headless: true,
+  plugins: [
+    storybookTest({
+      configDir: path.join(dirname, '.storybook'),
+    }),
+  ],
+  test: {
+    name: 'storybook',
+    browser: {
+      enabled: true,
+      instances: [
+        {
+          browser: 'chromium',
         },
-        setupFiles: [path.join(dirname, '.storybook/vitest.setup.js')],
+      ],
+      provider: playwright(),
+      headless: true,
     },
+  },
 });

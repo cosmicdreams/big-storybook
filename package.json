@@ -5,23 +5,23 @@
   "main": "index.js",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@github-ui/storybook-addon-performance-panel": "^1.1.4",
-    "@storybook/addon-a11y": "^10.2.16",
-    "@storybook/addon-docs": "^10.2.16",
-    "@storybook/addon-vitest": "^10.2.16",
-    "@storybook/html-vite": "^10.2.16",
-    "@storybook/test-runner": "^0.24.2",
-    "@vitest/browser": "^4.0.18",
-    "@vitest/browser-playwright": "^4.0.18",
-    "@vitest/coverage-v8": "4.0.18",
-    "eslint": "^10.0.3",
-    "eslint-plugin-storybook": "10.2.16",
-    "globals": "^17.4.0",
-    "playwright": "^1.58.2",
-    "prettier": "^3.8.1",
-    "storybook": "^10.2.16",
-    "vite": "^7.3.1",
-    "vitest": "^4.0.18"
+    "@github-ui/storybook-addon-performance-panel": "^1.3.0",
+    "@storybook/addon-a11y": "^10.6.0",
+    "@storybook/addon-docs": "^10.6.0",
+    "@storybook/addon-vitest": "^10.6.0",
+    "@storybook/html-vite": "^10.6.0",
+    "@storybook/test-runner": "^0.24.5",
+    "@vitest/browser": "^4.1.11",
+    "@vitest/browser-playwright": "^4.1.11",
+    "@vitest/coverage-v8": "4.1.11",
+    "eslint": "^10.10.0",
+    "eslint-plugin-storybook": "10.6.0",
+    "globals": "^17.12.0",
+    "playwright": "^1.63.0",
+    "prettier": "^3.9.6",
+    "storybook": "^10.6.0",
+    "vite": "^7.3.6",
+    "vitest": "^4.1.11"
   },
   "description": "Production-ready Storybook for HTML components with WebRTC screen sharing",
   "keywords": [
@@ -44,8 +44,8 @@
   },
   "type": "module",
   "overrides": {
-    "rollup": "^4.59.0",
-    "axios": "^1.13.6",
+    "rollup": "^4.63.3",
+    "axios": "^1.20.0",
     "minimatch": "^3.1.3"
   }
 }
